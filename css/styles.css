@@ -18,7 +18,7 @@
 }
 
 body {
-  background-image: url(/Images/night-sky-trees.jpg);
+  background-image: url(../Images/night-sky-trees.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -130,7 +130,6 @@ main {
 }
 
 main > * {
-  text-align: center;
   background-color: var(--frosted-background-color);
   backdrop-filter: var(--frosted-filter-blur);
   border: var(--frosted-border);
@@ -141,8 +140,9 @@ main > * {
 }
 
 .card-overview {
-  grid-column: 1 / span 8;
+  grid-column-end: span 8;
   display: flex;
+  flex-grow: 1;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 1fr;
   font-family: var(--font-family-third);
@@ -150,15 +150,14 @@ main > * {
 }
 
 .card-overview > * {
-  width: fit-content;
-  max-width: 100%;
+  min-width: fit-content;
+  /* max-width: 100%; */
 }
 
 .location-and-date {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  grid-column: 1 / span 2;
   justify-content: space-around;
 
 }
@@ -172,11 +171,16 @@ main > * {
 }
 
 .image-and-temp {
-  grid-column: 3 / span 2;
+  margin: auto 0;
+}
+
+.image-and-temp img {
+  object-fit: none;
+  height: 100px;
+  width: 100px;
 }
 
 .card-overview :last-child {
-  grid-column: 5 / span 1;
 }
 
 /* 

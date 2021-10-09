@@ -74,8 +74,8 @@ const initApp = () => {
         </p>
       </div>
     </div>
-    <div class="card card-three-day">3 Day Forcast</div>
-    <div class="card card-five-day">5 Day Forcast</div>
+    <div class="card card-three-day">3 Day Forecast</div>
+    <div class="card card-five-day">5 Day Forecast</div>
     <div class="card card-other">Other</div>
     `;
     weatherCards.innerHTML = html;
