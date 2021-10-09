@@ -12,19 +12,34 @@ const initApp = () => {
   
   //*function declarations:
 
+
   const displayWeather = (weatherData, locationName) => {
     // console.log({ weatherData });
     const weatherCards = document.querySelector("#weatherCards");
     const today = weatherData.daily[0],
       current = weatherData.current,
-      date = new Date(current.dt * 1000).toDateString(),
       sunrise = new Date(today.sunrise * 1000),
       sunset = new Date(today.sunset * 1000);
+
+
+
+    const dateStrObject = (() => {
+      let weekday, month, dayNum, year;
+      [weekday, month, dayNum, year] = new Date().toDateString().split(' ');
+      console.log(weekday, month, dayNum, year);
+      return {weekday, month, dayNum, year} 
+    })();
+
     const html = `
     <div class="card card-overview">
-      <h1 class="card-title location">${locationName}</h1>
-      <h3 class="card-text date">${date}</h5>
-      <div class="image-temp-row">
+      <div class="location-and-date">
+        <h1 class="card-title location">${locationName}</h1>
+        <div class="card-text date">
+          <span>${dateStrObject.weekday}</span>        
+          <span>${dateStrObject.month} ${dateStrObject.dayNum}, ${dateStrObject.year}</span>        
+        </div>
+      </div>
+      <div class="image-and-temp">
         <img
           src="http://openweathermap.org/img/wn/${
             current.weather[0].icon
@@ -39,15 +54,7 @@ const initApp = () => {
           )}°<span class="degree-units-system">F</span>
         </span>
       </div>
-      <div class="card-body">
-        <h3 class="card-title card-text">${current.weather[0].main}</h3>
-        <p class="card-text high-low-temp">
-          High ${Math.round(today.temp.max)}&deg;F Low ${Math.round(
-      today.temp.min
-    )}&deg;F
-        </p>
-      </div>
-    </div>
+    </div>  
     <div class="card card-info">
       <div class="card-body">
         <p class="card-text high-low-feels">
@@ -126,7 +133,8 @@ const initApp = () => {
             return true;
           }
         }).address_components;
-        locationName = locationName.concat(addressComponents[0].long_name + ", " + addressComponents[2].short_name);
+        locationName = locationName.concat(addressComponents[0].long_name + ", " + addressComponents[2].long_name);
+        locationName = locationName.split(', ').join(' </br> ');
         console.log(addressComponents);
         return fetchWeather(lat, lon, locationName);
       })

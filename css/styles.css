@@ -117,19 +117,19 @@ nav a:hover {
   color: rgba(255, 255, 255, 1);
 }
 
-.weather-cards {
+main {
   /* margin: 2rem 0; */
   color: rgba(255, 255, 255, .70);
   display: grid;
   min-height: 75vh;
-  width: min(100%, 1040px);
+  width: min(100%, 910px);
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 1fr 1fr;
   gap: 5% 2.5%;
   padding: 2vw;
 }
 
-.weather-cards > * {
+main > * {
   text-align: center;
   background-color: var(--frosted-background-color);
   backdrop-filter: var(--frosted-filter-blur);
@@ -137,20 +137,49 @@ nav a:hover {
   border-radius: 5px;
   grid-column-end: span 4;
   box-shadow: var(--frosted-box-shadow);
-  min-height: 100%;
+  max-height: 100%;
 }
 
 .card-overview {
-  grid-row: 1 / span 2;
+  grid-column: 1 / span 8;
   display: flex;
-  flex-direction: column;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr;
   font-family: var(--font-family-third);
-  justify-content: space-around;
-  
+  /* gap: 1rem; */
 }
 
+.card-overview > * {
+  width: fit-content;
+  max-width: 100%;
+}
 
+.location-and-date {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  grid-column: 1 / span 2;
+  justify-content: space-around;
 
+}
+
+.location-and-date > * {
+  width: max-content;
+}
+
+.date :first-child {
+  color: red;
+}
+
+.image-and-temp {
+  grid-column: 3 / span 2;
+}
+
+.card-overview :last-child {
+  grid-column: 5 / span 1;
+}
+
+/* 
 .image-temp-row {
   width: 100%;
   height: auto;
@@ -166,7 +195,7 @@ nav a:hover {
 
 .image-temp-row > span {
   font-size: 3rem;
-}
+} */
 
 footer {
   display: flex;
