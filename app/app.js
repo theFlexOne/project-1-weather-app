@@ -1,4 +1,10 @@
 import getRdmMovieQuote from '/data/movie-quotes.js'
+const express = require('express');
+const app = express();
+const cors = require('express')
+
+
+
 
 const initApp = () => {
   //*variable declarations:
