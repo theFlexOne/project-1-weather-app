@@ -4,8 +4,6 @@ import { OPEN_WEATHER_API_KEY, GOOGLE_API_KEY } from '../api-keys.js';
 const initApp = () => {
   
   //*variable declarations:
-  // const GOOGLE_API_KEY = "AIzaSyB1aR-6UfP_eAUogWTty_XcqAWnDl-_1Aw";
-  // const OPEN_WEATHER_API_KEY = "6fbfff15f75b941ce268d9ce6b344f79"
   const PLACES_API_ENDPOINT = "/api/places/"
   const OPEN_WEATHER_API_ENDPOINT = "https://api.openweathermap.org/data/2.5/onecall?"
 
