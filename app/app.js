@@ -7,7 +7,7 @@ const initApp = () => {
   const PLACES_API_ENDPOINT = "/api/places/"
   const OPEN_WEATHER_API_ENDPOINT = "https://api.openweathermap.org/data/2.5/onecall?"
 
-  const searchForm = document.querySelector('#searchForm');
+  const searchForm = document.querySelector('header form');
   const searchBox = document.querySelector('#searchBox');
   const userLocationButton = document.querySelector('#userLocationButton');
 
@@ -17,7 +17,7 @@ const initApp = () => {
 
   const displayWeather = (weatherData, locationName) => {
     // console.log({ weatherData });
-    const weatherCards = document.querySelector("#weatherCards");
+    const weatherCards = document.querySelector("main");
     const today = weatherData.daily[0],
       current = weatherData.current,
       sunrise = new Date(today.sunrise * 1000),
@@ -115,7 +115,7 @@ const initApp = () => {
         const locationName = data.candidates[0].formatted_address;
         return fetchWeather(lat, lon, locationName);
       })
-      .catch(console.error);
+      .catch(error => console.error(error));
   };
 
   const fetchUserLocationName = (lat, lon) => {

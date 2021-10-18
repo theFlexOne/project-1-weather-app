@@ -12,60 +12,63 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Teko:wght@300;400;500;600;700&family=Titillium+Web:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css" />
-    
+
+    <script src="/app/app.js" type="module" defer></script>
   </head>
 
   <body>
-    <div class="page-container">
-      <header>
+    <header>
+      <div class="logo" id="logo">
         <img src="./Images/weather-app-logo.png" alt="weather app logo">
-        <form class="search-form" id="searchForm">
-          <label for="searchBox"></label>
-          <input type="search" name="Location Search" class="search-box" id="searchBox" placeholder="blahAHAHA">
+      </div>
+      <!-- <div class="search-container"> -->
+        <form>
+          <label>
+            <input type="search" name="Location Search" class="search-box" id="searchBox" placeholder="blahAHAHA">
+          </label>
           <button type="submit" id="searchButton" class="search-button"><span class="material-icons-outlined">search</span></button>
           <button type="button" id="userLocationButton" class="user-location-button"><span class="material-icons-outlined">my_location</span></button>
         </form>
-        <nav>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">About</a></li>
-        </nav>
-      </header>
+      <!-- </div> -->
+      <nav>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">About</a></li>
+      </nav>
+    </header>
 
-      <main class="weather-cards" id="weatherCards">
-        <div class="card card-overview">
-          <h1 class="card-title location"></h1>
-          <h3 class="card-text date"></h5>
-          <div class="image-temp-row">
-            <img src="#">
-            <span></span>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title card-text"></h3>
-            <p class="card-text high-low-temp"></p>
-          </div>
+    <main>
+      <div class="card card-overview">
+        <!-- <h1 class="card-title location"></h1>
+        <h3 class="card-text date"></h5>
+        <div class="image-and-temp-box">
+          <img src="#">
+          <span></span>
         </div>
-        <div class="card card-info">
-          <div class="card-body">
-            <p class="card-text high-low-feels"></p>
-            <p class="card-text"></p>
-            <p class="card-text"></p>
-            <p class="card-text"></p>
-            <p class="card-text"></p>
-          </div>
-        </div>
-        <div class="card card-three-day"></div>
-        <div class="card card-five-day"></div>
-        <div class="card card-other"></div>
-      </main>
-      <footer>
-        <h3 class="movie-quote" id="movieQuote"></h3>
-      </footer>
-    </div>
+        <div class="card-body">
+          <h3 class="card-title card-text"></h3>
+          <p class="card-text high-low-temp"></p>
+        </div> -->
+      </div>
+      <div class="card card-info">
+        <!-- <div class="card-body">
+          <p class="card-text high-low-feels"></p>
+          <p class="card-text"></p>
+          <p class="card-text"></p>
+          <p class="card-text"></p>
+          <p class="card-text"></p>
+        </div> -->
+      </div>
+      <div class="card card-three-day"></div>
+      <div class="card card-five-day"></div>
+      <div class="card card-other"></div>
+    </main>
+    <footer>
+      <h3 class="movie-quote" id="movieQuote"></h3>
+    </footer>
 
 
 
     <!-- <script src="/api-keys.js"></script> -->
-    <script src="/app/app.js" type="module"></script>
   </body>
 </html>
