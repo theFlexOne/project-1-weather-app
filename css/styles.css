@@ -65,13 +65,14 @@ header form {
   gap: inherit;
   margin-right: auto;
   margin-left: auto;
+  padding-left: 0;
   align-items: center;
 }
 
-header label {
+/* header label {
   height: 3rem;
   width: 100%;
-}
+} */
 
 header input[type="search"] {
   padding-left: 1rem;
@@ -83,6 +84,7 @@ header input[type="search"] {
   font-weight: 500;
   border-radius: 50px;
   width: 100%;
+  flex-grow: 1;
 }
 
 header input[type="search"]:focus {
@@ -151,7 +153,8 @@ main > * {
   flex-grow: 1;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 1fr;
-  font-family: var(--font-family-third);
+  font-family: var(--font-family-second);
+  font-weight: 100;
   /* gap: 1rem; */
 }
 

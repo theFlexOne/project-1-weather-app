@@ -26,8 +26,8 @@ const initApp = () => {
 
 
     const dateStrObject = (() => {
-      let weekday, month, dayNum, year;
-      [weekday, month, dayNum, year] = new Date().toDateString().split(' ');
+      // let weekday, month, dayNum, year;
+      const [weekday, month, dayNum, year] = new Date().toDateString().split(' ');
       console.log(weekday, month, dayNum, year);
       return {weekday, month, dayNum, year} 
     })();
@@ -109,7 +109,7 @@ const initApp = () => {
         return res.json();
       })
       .then(data => {
-        console.log(data.candidates[0]);
+        console.log(data);
         const lat = data.candidates[0].geometry.location.lat.toPrecision(4);
         const lon = data.candidates[0].geometry.location.lng.toPrecision(4);
         const locationName = data.candidates[0].formatted_address;
@@ -127,7 +127,6 @@ const initApp = () => {
       })
       .then(data => {
         console.log(data);
-        let locationName = "";
         const addressComponents = data.results.find(result => {
           if (result.types[0] === "locality" && 
               result.types[1] === "political" && 
@@ -135,9 +134,10 @@ const initApp = () => {
             return true;
           }
         }).address_components;
-        locationName = locationName.concat(addressComponents[0].long_name + ", " + addressComponents[2].long_name);
-        locationName = locationName.split(', ').join(' </br> ');
         console.log(addressComponents);
+        const locationName = {specificLocation: addressComponents[0].long_name, broadLocation: addressComponents[2].long_name}
+        // locationName = locationName.concat(addressComponents[0].long_name + ", " + addressComponents[2].long_name);
+        // locationName = locationName.split(', ').join(' </br> ');
         return fetchWeather(lat, lon, locationName);
       })
       .catch(console.error);
