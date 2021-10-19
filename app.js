@@ -1,5 +1,5 @@
-import getRdmMovieQuote from '/data/movie-quotes.js'
-import { OPEN_WEATHER_API_KEY, GOOGLE_API_KEY } from '../api-keys.js';
+import getRdmMovieQuote from './data/movie-quotes.js'
+import { OPEN_WEATHER_API_KEY, GOOGLE_API_KEY } from './api-keys.js';
 
 const initApp = () => {
   
@@ -97,7 +97,7 @@ const initApp = () => {
 
   const fetchInputLocationData = (e) => {
     const input = searchBox.value;
-    const url = `${PLACES_API_ENDPOINT}input=${input}&fields=geometry,name,formatted_address&inputtype=textquery&key=${GOOGLE_API_KEY}`;
+    const url = `${PLACES_API_ENDPOINT}?input=${input}&fields=name%2Cgeometry%2Cplace_id&inputtype=textquery&key=${GOOGLE_API_KEY}`;
     e.preventDefault();
     searchForm.reset();
     console.log(input);

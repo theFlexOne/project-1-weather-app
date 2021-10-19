@@ -11,6 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "netlify": "^8.0.1"
+    "netlify": "^8.0.2"
   }
 }
