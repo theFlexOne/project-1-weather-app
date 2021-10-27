@@ -1,11 +1,13 @@
-import getRdmMovieQuote from './data/movie-quotes.js'
-import { OPEN_WEATHER_API_KEY, GOOGLE_API_KEY } from './api-keys.js';
+const OPEN_WEATHER_API_KEY = '37fc3c7b9cfbdc5c99764ee1486ef34d'
+const GOOGLE_API_KEY = "AIzaSyCMNhm78jy8Z_PGj1nAKmWPfICcULLsWRA";
+
 
 const initApp = () => {
   
   //*variable declarations:
-  const PLACES_API_ENDPOINT = "/api/places/"
+  const PLACES_API_ENDPOINT = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?"
   const OPEN_WEATHER_API_ENDPOINT = "https://api.openweathermap.org/data/2.5/onecall?"
+  const GEOCODE_API_ENDPOINT = "https://maps.googleapis.com/maps/api/geocode/json?"
 
   const searchForm = document.querySelector('header form');
   const searchBox = document.querySelector('#searchBox');
@@ -15,46 +17,50 @@ const initApp = () => {
   //*function declarations:
 
 
-  const displayWeather = (weatherData, locationName) => {
+  const displayWeather = (weatherData, location) => {
     // console.log({ weatherData });
+    // console.log({ location });
+    const locationName = `<span class="city">${location[0]}</span></br><span class="state">${location[1] || ""}</span>`
     const weatherCards = document.querySelector("main");
     const today = weatherData.daily[0],
       current = weatherData.current,
       sunrise = new Date(today.sunrise * 1000),
-      sunset = new Date(today.sunset * 1000);
+      sunset = new Date(today.sunset * 1000)
 
 
 
     const dateStrObject = (() => {
       // let weekday, month, dayNum, year;
       const [weekday, month, dayNum, year] = new Date().toDateString().split(' ');
-      console.log(weekday, month, dayNum, year);
+      // console.log(weekday, month, dayNum, year);
       return {weekday, month, dayNum, year} 
     })();
 
     const html = `
     <div class="card card-overview">
       <div class="location-and-date">
-        <h1 class="card-title location">${locationName}</h1>
+        <div class="card-title location">${locationName}</div>
         <div class="card-text date">
-          <span>${dateStrObject.weekday}</span>        
+          <span class="weekday">${dateStrObject.weekday}</span>        
           <span>${dateStrObject.month} ${dateStrObject.dayNum}, ${dateStrObject.year}</span>        
         </div>
       </div>
-      <div class="image-and-temp">
-        <img
-          src="http://openweathermap.org/img/wn/${
-            current.weather[0].icon
-          }@4x.png"
-          class="card-img"
-          alt="Weather description"
-          title="${current.weather[0].description}"
-        />
-        <span>
+      <div class="weather">
+        <div class="image-wrapper">  
+          <img
+            src="http://openweathermap.org/img/wn/${
+              current.weather[0].icon
+            }@4x.png"
+            class="image"
+            alt="Weather description"
+            title="${current.weather[0].description}"
+          />
+        </div>
+        <div class="temp">
           ${Math.round(
             current.temp
-          )}°<span class="degree-units-system">F</span>
-        </span>
+          )}&deg<span class="units">F</span>
+        </div>
       </div>
     </div>  
     <div class="card card-info">
@@ -83,7 +89,7 @@ const initApp = () => {
     weatherCards.innerHTML = html;
   };
   
-  const fetchWeather = (lat, lon, locationName) => {
+  const fetchWeather = (lat, lon, locationName = "name") => {
     const units = "imperial";
     const url = `${OPEN_WEATHER_API_ENDPOINT}lat=${lat}&lon=${lon}&units=${units}&lang=en&appid=${OPEN_WEATHER_API_KEY}`;
     fetch(url)
@@ -97,10 +103,10 @@ const initApp = () => {
 
   const fetchInputLocationData = (e) => {
     const input = searchBox.value;
-    const url = `${PLACES_API_ENDPOINT}?input=${input}&fields=name%2Cgeometry%2Cplace_id&inputtype=textquery&key=${GOOGLE_API_KEY}`;
+    const url = `${PLACES_API_ENDPOINT}input=${input}&fields=formatted_address,name,geometry,place_id&inputtype=textquery&key=${GOOGLE_API_KEY}`;
     e.preventDefault();
     searchForm.reset();
-    console.log(input);
+    // console.log(input);
     // debugger;
     if (input === "") return fetchUserLocationData();
     fetch(url)
@@ -109,24 +115,26 @@ const initApp = () => {
         return res.json();
       })
       .then(data => {
-        console.log(data);
+        // console.log(data);
         const lat = data.candidates[0].geometry.location.lat.toPrecision(4);
         const lon = data.candidates[0].geometry.location.lng.toPrecision(4);
-        const locationName = data.candidates[0].formatted_address;
+        const locationName = data.candidates[0].formatted_address.split(" ");
+        console.log(locationName);
+        // console.log(locationName);
         return fetchWeather(lat, lon, locationName);
       })
       .catch(error => console.error(error));
   };
 
   const fetchUserLocationName = (lat, lon) => {
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=44.805331745443546,-95.53558784405938&key=${GOOGLE_API_KEY}`
+    const url = `${GEOCODE_API_ENDPOINT}latlng=${lat},${lon}&key=${GOOGLE_API_KEY}`
     fetch(url)
       .then(res => {
         if (!res.ok) throw new Error(res.statusText);
         return res.json();
       })
       .then(data => {
-        console.log(data);
+        // console.log(data);
         const addressComponents = data.results.find(result => {
           if (result.types[0] === "locality" && 
               result.types[1] === "political" && 
@@ -134,10 +142,8 @@ const initApp = () => {
             return true;
           }
         }).address_components;
-        console.log(addressComponents);
-        const locationName = {specificLocation: addressComponents[0].long_name, broadLocation: addressComponents[2].long_name}
-        // locationName = locationName.concat(addressComponents[0].long_name + ", " + addressComponents[2].long_name);
-        // locationName = locationName.split(', ').join(' </br> ');
+        // console.log(addressComponents);
+        const locationName = [addressComponents[0].long_name + ',', addressComponents[2].long_name]
         return fetchWeather(lat, lon, locationName);
       })
       .catch(console.error);
@@ -152,10 +158,10 @@ const initApp = () => {
     navigator.geolocation.getCurrentPosition(success, error);
   };
 
-  const displayRdmMovieQuotes = () => {
-    const movieQuote = document.querySelector('#movieQuote');
-    movieQuote.innerHTML = getRdmMovieQuote();
-  }
+  // const displayRdmMovieQuotes = () => {
+  //   const movieQuote = document.querySelector('#movieQuote');
+  //   movieQuote.innerHTML = getRdmMovieQuote();
+  // }
 
   //*event listeners:
 
@@ -164,7 +170,7 @@ const initApp = () => {
 
 
   fetchUserLocationData();
-  displayRdmMovieQuotes();
+  // displayRdmMovieQuotes();
   // searchBox.focus();
 
 

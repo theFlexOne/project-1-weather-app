@@ -159,37 +159,69 @@ main > * {
 }
 
 .card-overview > * {
-  min-width: fit-content;
-  /* max-width: 100%; */
+  flex-grow: 1;
 }
 
 .location-and-date {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: space-around;
-
+  justify-content: space-between;
+  align-items: center;
+  width: 33%;
+  margin: 1rem;
 }
 
-.location-and-date > * {
-  width: max-content;
+.location {
+  max-width: 70%;
 }
 
-.date :first-child {
-  color: red;
+.location .city {
+  font-size: 2.25rem;
+  font-weight: 200;
 }
 
-.image-and-temp {
-  margin: auto 0;
+.location .state {
+  font-size: 1.25rem;
+  font-weight: 200;
 }
 
-.image-and-temp img {
-  object-fit: none;
-  height: 100px;
-  width: 100px;
+.date {
+  font-size: 1.15rem;
+  text-align: left;
 }
 
-.card-overview :last-child {
+.date .weekday {
+  font-size: 1.75rem;
+  font-weight: bolder;
+}
+
+.date:last-child {
+  font-weight: 200;
+}
+
+.card-overview .weather {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+.card-overview .image-wrapper {
+  width: 200px;
+  align-self: flex-start;
+}
+
+.card-overview .image {
+  /* object-fit: none; */
+}
+
+.card-overview .temp {
+  align-self: flex-end;
+  font-size: 3rem;
+}
+
+.temp .units {
+  font-size: 1rem;
 }
 
 /* 
