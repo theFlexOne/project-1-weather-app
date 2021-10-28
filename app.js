@@ -37,10 +37,10 @@ const initApp = () => {
     })();
 
     const html = `
-    <div class="card card-overview">
+    <div class="card overview">
       <div class="location-and-date">
-        <div class="card-title location">${locationName}</div>
-        <div class="card-text date">
+        <div class="title location">${locationName}</div>
+        <div class="text date">
           <span class="weekday">${dateStrObject.weekday}</span>        
           <span>${dateStrObject.month} ${dateStrObject.dayNum}, ${dateStrObject.year}</span>        
         </div>
@@ -63,28 +63,27 @@ const initApp = () => {
         </div>
       </div>
     </div>  
-    <div class="card card-info">
-      <div class="card-body">
-        <p class="card-text high-low-feels">
+    <div class="card description">
+      <div class="body">
+        <div class="high-low">
           Feels like high: ${today.feels_like.day}&deg;F
-        </p>
-        <p class="card-text">Precipitation ${today.pop * 100}%</p>
-        <p class="card-text">Wind ${today.wind_speed}m/s, ${
-      today.wind_deg
-    }&deg;</p>
-        <p class="card-text">
-          Sunrise ${sunrise.getHours()}:${sunrise.getMinutes()} AM
-        </p>
-        <p class="card-text">
+        </div>
+        <div class="wind-rain"><span>${today.pop * 100}%</span><span>${today.wind_speed}m/s, ${
+          today.wind_deg
+        }&deg</span></div>
+        <div class="sunrise-sunset">
+          <span class="sunrise">Sunrise ${sunrise.getHours()}:${sunrise.getMinutes()} AM</span>
+          <span class="sunset">
           Sunset ${
             sunset.getHours() > 12 ? sunset.getHours() - 12 : sunset.getHours()
           }:${sunset.getMinutes()} PM
-        </p>
+          </span>
+        </div>
       </div>
     </div>
-    <div class="card card-three-day">3 Day Forecast</div>
-    <div class="card card-five-day">5 Day Forecast</div>
-    <div class="card card-other">Other</div>
+    <div class="card five-day">5 Day Forecast</div>
+    <div class="card hourly">Hourly Forecast</div>
+    <div class="card other">Other</div>
     `;
     weatherCards.innerHTML = html;
   };

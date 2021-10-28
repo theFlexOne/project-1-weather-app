@@ -150,7 +150,7 @@ main > * {
   max-height: 100%;
 }
 
-.card-overview {
+.overview {
   grid-column-end: span 8;
   display: flex;
   flex-grow: 1;
@@ -161,7 +161,7 @@ main > * {
   /* gap: 1rem; */
 }
 
-.card-overview > * {
+.overview > * {
   flex-grow: 1;
 }
 
@@ -204,19 +204,19 @@ main > * {
   font-weight: 200;
 }
 
-.card-overview .weather {
+.overview .weather {
   display: flex;
   flex-direction: column;
   margin: 1rem;
 }
 
-.card-overview .image-wrapper {
+.overview .image-wrapper {
   width: 200px;
   align-self: flex-start;
   
 }
 
-.card-overview .temp {
+.overview .temp {
   align-self: flex-end;
   font-size: 3.5rem;
 }
