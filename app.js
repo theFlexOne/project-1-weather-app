@@ -59,7 +59,7 @@ const initApp = () => {
         <div class="temp">
           ${Math.round(
             current.temp
-          )}&deg<span class="units">F</span>
+          )}<span class="units">&degF</span>
         </div>
       </div>
     </div>  
