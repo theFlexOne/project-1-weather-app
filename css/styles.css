@@ -218,7 +218,7 @@ main > * {
 
 .overview .temp {
   align-self: flex-end;
-  font-size: 3.5rem;
+  font-size: 4rem;
 }
 
 .temp .units {
