@@ -2,7 +2,7 @@ import { OPEN_WEATHER_API_KEY, GOOGLE_API_KEY } from "./api-keys.js";
 
 const initApp = () => {
   const PLACES_API_ENDPOINT =
-    "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?";
+    "/api/places/json?";
   const OPEN_WEATHER_API_ENDPOINT =
     "https://api.openweathermap.org/data/2.5/onecall?";
   const GEOCODE_API_ENDPOINT =
