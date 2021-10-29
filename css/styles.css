@@ -216,12 +216,11 @@ main > * {
 .overview .image-wrapper {
   max-height: 120px;
   max-width: 120px;
-  /* display: flex; */
+  display: flex;
   align-self: flex-start;
-  /* align-items: flex-start; */
 }
 
-.image-wrapper .image {
+.image-wrapper img {
   height: 100%;
   object-fit: none;
 }
