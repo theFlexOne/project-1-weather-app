@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Teko:wght@300;400;500;600;700&family=Titillium+Web:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css" />
 
-    <script src="app.js" type="module" defer></script>
+    <script src="./app.js" type="module" defer></script>
   </head>
 
   <body>
@@ -37,30 +37,40 @@
     </header>
 
     <main>
-      <div class="card card-overview">
-        <!-- <h1 class="card-title location"></h1>
-        <h3 class="card-text date"></h5>
+      <div class="card overview">
+        <!-- <h1 class="title location"></h1>
+        <h3 class="text date"></h5>
         <div class="image-and-temp-box">
           <img src="#">
           <span></span>
         </div>
-        <div class="card-body">
-          <h3 class="card-title card-text"></h3>
-          <p class="card-text high-low-temp"></p>
+        <div class="body">
+          <h3 class="title text"></h3>
+          <p class="text high-low-temp"></p>
         </div> -->
       </div>
-      <div class="card card-info">
-        <!-- <div class="card-body">
-          <p class="card-text high-low-feels"></p>
-          <p class="card-text"></p>
-          <p class="card-text"></p>
-          <p class="card-text"></p>
-          <p class="card-text"></p>
+      <div class="card description">
+        <div class="wrapper">
+          <div class="high-temp"></div>
+          <div class="low-temp"></div>
+          <div class="percipitation"></div>
+          <div class="wind"></div>
+          <div class="humidity"></div>
+          <div class="visibility"></div>
+          <div class="sunrise"></div>
+          <div class="sunset"></div>
+        </div>
+        <!-- <div class="body">
+          <p class="text high-low-feels"></p>
+          <p class="text"></p>
+          <p class="text"></p>
+          <p class="text"></p>
+          <p class="text"></p>
         </div> -->
       </div>
-      <div class="card card-three-day"></div>
-      <div class="card card-five-day"></div>
-      <div class="card card-other"></div>
+      <div class="card three-day"></div>
+      <div class="card five-day"></div>
+      <div class="card other"></div>
     </main>
     <footer>
       <h3 class="movie-quote" id="movieQuote"></h3>

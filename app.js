@@ -1,10 +1,7 @@
-const OPEN_WEATHER_API_KEY = '37fc3c7b9cfbdc5c99764ee1486ef34d'
-const GOOGLE_API_KEY = "AIzaSyCMNhm78jy8Z_PGj1nAKmWPfICcULLsWRA";
-
+import { OPEN_WEATHER_API_KEY, GOOGLE_API_KEY } from "./api-keys.js";
 
 const initApp = () => {
   
-  //*variable declarations:
   const PLACES_API_ENDPOINT = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?"
   const OPEN_WEATHER_API_ENDPOINT = "https://api.openweathermap.org/data/2.5/onecall?"
   const GEOCODE_API_ENDPOINT = "https://maps.googleapis.com/maps/api/geocode/json?"
@@ -12,10 +9,6 @@ const initApp = () => {
   const searchForm = document.querySelector('header form');
   const searchBox = document.querySelector('#searchBox');
   const userLocationButton = document.querySelector('#userLocationButton');
-
-  
-  //*function declarations:
-
 
   const displayWeather = (weatherData, location) => {
     // console.log({ weatherData });
@@ -27,8 +20,6 @@ const initApp = () => {
       sunrise = new Date(today.sunrise * 1000),
       sunset = new Date(today.sunset * 1000)
 
-
-
     const dateStrObject = (() => {
       // let weekday, month, dayNum, year;
       const [weekday, month, dayNum, year] = new Date().toDateString().split(' ');
@@ -39,10 +30,9 @@ const initApp = () => {
     const html = `
     <div class="card overview">
       <div class="location-and-date">
-        <div class="title location">${locationName}</div>
-        <div class="text date">
+        <div class="location">${locationName}</div>
+        <div class="date">
           <span class="weekday">${dateStrObject.weekday}</span>        
-          <span>${dateStrObject.month} ${dateStrObject.dayNum}, ${dateStrObject.year}</span>        
         </div>
       </div>
       <div class="weather">
@@ -51,10 +41,6 @@ const initApp = () => {
             src="http://openweathermap.org/img/wn/${
               current.weather[0].icon
             }@4x.png"
-            class="image"
-            alt="Weather description"
-            title="${current.weather[0].description}"
-          />
         </div>
         <div class="temp">
           ${Math.round(
