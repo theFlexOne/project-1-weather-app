@@ -6,5 +6,5 @@ css/styles copy.css
 app
 Images/other images
 index copy.html
-# netlify.toml
+netlify.toml
 .env
