@@ -6,13 +6,10 @@ This is your basic beginner's weather app. This is the first full project I've b
 
 The app is very straightforward both in terms of user experience, and code. It's purpose is to display a detailed weather report of the user's current position, as well as, search for and display the weather of any location.
 
-To obtain the weather at the user's location, it uses the browser's built-in Navigator object to get the device location and sends it to Google's Geocoding API to retrieve a location name, and to OpenWeather's One-Call API to retrieve the weather data. When retrieving 
+It uses a combination of OpenWeather's One-Call API, Google's Places API, and Google's Geocoding API to retrieve all the necessary information to display the weather and location accurately.
 
 Although this app is designed for user experience, it's real purpose is to be a springboard for learning JavaScript and a place to practice different concepts. A more polished version will eventually be uploaded that will truly be designed with the user in mind.
 
 ## Installation
 
 There's nothing to install. Feel free to fork it and build your own app on top. You will, however, need to supply your own API keys.
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
