@@ -1,75 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, user-scalable=no,
-            maximum-scale=1"
-    />
 
-    <title>Weather App</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Teko:wght@300;400;500;600;700&family=Titillium+Web:wght@200;300;400;600;700;900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/css/styles.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no,
+            maximum-scale=1" />
 
-    <script src="./app.js" type="module" defer></script>
-  </head>
+  <title>Weather App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Teko:wght@300;400;500;600;700&family=Titillium+Web:wght@200;300;400;600;700;900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
 
-  <body>
-    <header>
-      <div class="logo" id="logo">
-        <img src="./Images/weather-app-logo.png" alt="weather app logo" />
+  <script src="./app.js" type="module" defer></script>
+</head>
+
+<body>
+  <header>
+    <div class="logo" id="logo">
+      <img src="./Images/weather-app-logo.png" alt="weather app logo" />
+    </div>
+    <!-- <div class="search-container"> -->
+    <form>
+      <label for="searchBox"></label>
+      <input type="search" name="Location Search" class="search-box" id="searchBox"
+        placeholder="Search by City & State, or Zip Code" />
+      <button type="submit" id="searchButton" class="search-button">
+        <i class="material-icons-outlined">search</i>
+      </button>
+      <button type="button" id="userLocationButton" class="user-location-button">
+        <i class="material-icons-outlined">my_location</i>
+      </button>
+    </form>
+    <!-- </div> -->
+    <nav>
+      <a href="https://dev.to/eric_havey">Blog</a>
+      <a href="#">Projects</a>
+      <a href="#">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card overview"></section>
+    <section class="card description"></section>
+    <section class="card five-day"></section>
+    <section class="card hourly"></section>
+    <section class="card other"></section>
+
+    <template id="overviewTemplate" class="overview template">
+      <div class="location-and-date">
+        <div class="location"></div>
+        <div class="date">
+          <span class="weekday"></span>
+          <span></span>
+        </div>
       </div>
-      <!-- <div class="search-container"> -->
-      <form>
-        <label for="searchBox"></label>
-        <input
-          type="search"
-          name="Location Search"
-          class="search-box"
-          id="searchBox"
-          placeholder="Search by City & State, or Zip Code"
-        />
-        <button type="submit" id="searchButton" class="search-button">
-          <i class="material-icons-outlined">search</i>
-        </button>
-        <button
-          type="button"
-          id="userLocationButton"
-          class="user-location-button"
-        >
-          <i class="material-icons-outlined">my_location</i>
-        </button>
-      </form>
-      <!-- </div> -->
-      <nav>
-        <a href="https://dev.to/eric_havey">Blog</a>
-        <a href="#">Projects</a>
-        <a href="#">About</a>
-      </nav>
-    </header>
+      <div class="weather">
+        <div class="image-wrapper">
+          <img src="#">
+        </div>
+        <div class="temp">
+          <span class="unit"></span>
+        </div>
+      </div>
+    </template>
 
-    <main>
-      <section class="card overview"></section>
-      <section class="card description"></section>
-      <section class="card five-day"></section>
-      <section class="card hourly"></section>
-      <section class="card other"></section>
-    </main>
-    <footer>
-      <h3 class="movie-quote" id="movieQuote"></h3>
-    </footer>
+    <template id="descriptionTemplate" class="description template">
+      <div class="high-temp"><span class="unit"></span></div>
+      <div class="low-temp"><span class="unit"></span></div>
+      <div class="rain"></div>
+      <div class="wind"></div>
+      <div class="humidity"></div>
+      <div class="visibility"></div>
+      <div class="sunrise"></div>
+      <div class="sunset"></div>
+    </template>
+  </main>
 
-  </body>
+  <footer>
+    <h3 class="movie-quote" id="movieQuote"></h3>
+  </footer>
+
+</body>
+
 </html>
