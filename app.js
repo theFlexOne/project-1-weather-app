@@ -57,12 +57,12 @@ const initApp = () => {
 
     const forecastDescription = `
       <!-- <div class="wrapper"> -->
-        <div class="high-temp">High: ${
+        <div class="high-temp">High: ${Math.round(
           today.temp.max
-        }&deg;<span class="unit">F</span></div>
-        <div class="low-temp">Low: ${
+        )}&deg;<span class="unit">F</span></div>
+        <div class="low-temp">Low: ${Math.round(
           today.temp.min
-        }&deg;<span class="unit">F</span></div>
+        )}&deg;<span class="unit">F</span></div>
         <div class="rain">Rain: ${today.pop}%</div>
         <div class="wind">Wind: ${current.wind_speed} m/h</div>
         <div class="humidity">Humidity: ${current.humidity}%</div>
@@ -91,9 +91,9 @@ const initApp = () => {
       };
       twelveHours.forEach(({ temp, dt }) => {
         const hours = new Date(dt * 1000).getHours();
-        const div = `<span>${parseHours(
-          hours
-        )} | ${temp}&deg;<span class="unit">F</span></span>`;
+        const div = `<span>${parseHours(hours)} | ${Math.round(
+          temp
+        )}&deg;<span class="unit">F</span></span>`;
         divs.push(div);
       });
       return divs.join('');
@@ -223,7 +223,9 @@ const initApp = () => {
           <span class="day-of-the-week">${dayOfTheWeek}</span>
           <img src="${iconURL}">
           <span>
-            ${min}&deg;<span class="unit">F</span> - ${max}&deg;<span class="unit">F</span>
+            ${Math.round(min)}&deg;<span class="unit">F</span> - ${Math.round(
+        max
+      )}&deg;<span class="unit">F</span>
           </span>
         </div>`;
       divs.push(div);
@@ -231,15 +233,11 @@ const initApp = () => {
     return divs.join('');
   };
 
-  //*event listeners:
-
+  //* **event listeners** *//
   searchForm.addEventListener('submit', fetchInputLocationData);
   userLocationButton.addEventListener('click', fetchUserLocationData);
 
   fetchUserLocationData();
-  // displayRdmMovieQuotes();
-  // searchBox.focus();
 };
 
 document.addEventListener('DOMContentLoaded', initApp);
-// initApp();
