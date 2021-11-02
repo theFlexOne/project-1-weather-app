@@ -28,6 +28,56 @@ const initApp = () => {
     const sunrise = new Date(today.sunrise * 1000);
     const sunset = new Date(today.sunset * 1000);
 
+    const dateStrObject = (() => {
+      // let weekday, month, dayNum, year;
+      let [weekday, ...date] = new Date()
+        .toDateString()
+        .split(" ");
+      date = date.join(',');
+      console.log(weekday, date);
+      return {
+        weekday,
+        date
+      };
+    })();
+
+    const overview = `      
+      <div class="location-and-date">
+        <div class="location">${locationName}</div>
+        <div class="date">
+        <span class="weekday">${dateStrObject.weekday}</span>        
+        <span>${dateStrObject.date}</span>        
+        </div>
+      </div>
+      <div class="weather">
+        <div class="image-wrapper">  
+          <img
+            src="http://openweathermap.org/img/wn/${
+              current.weather[0].icon
+            }@4x.png">
+        </div>
+        <div class="temp">
+          ${Math.round(current.temp)}<span class="units">&degF</span>
+        </div>
+      </div>
+`;
+
+    const description = `
+      <div class="wrapper">
+        <div class="high-temp">High: ${today.temp.max}&deg;F</div>
+        <div class="low-temp">Low: ${today.temp.min}&deg;F</div>
+        <div class="rain">Rain: ${today.pop}%</div>
+        <div class="wind">Wind: ${current.wind_speed}m/h</div>
+        <div class="humidity">Humidity: ${current.humidity}%</div>
+        <div class="visibility">Visibility: ${current.visibility}m</div>
+        <div class="sunrise">Sunrise ${sunrise.getHours()}:${sunrise.getMinutes()} AM</div>
+        <div class="sunset">Sunset ${
+          sunset.getHours() > 12 ? sunset.getHours() - 12 : sunset.getHours()
+        }:${sunset.getMinutes()} PM
+        </div>
+      </div>
+    `;
+
     const fiveDayForecast = (() => {
       const fiveDays = weatherData.daily.slice(1, 6);
       const divs = [];
@@ -48,55 +98,9 @@ const initApp = () => {
       return divs.join('')
     })()
 
-    const dateStrObject = (() => {
-      // let weekday, month, dayNum, year;
-      const [weekday, month, dayNum, year] = new Date()
-        .toDateString()
-        .split(" ");
-      // console.log(weekday, month, dayNum, year);
-      return {
-        weekday,
-        month,
-        dayNum,
-        year,
-      };
-    })();
-
     const html = `
-    <div class="card overview">
-      <div class="location-and-date">
-        <div class="location">${locationName}</div>
-        <div class="date">
-          <span class="weekday">${dateStrObject.weekday}</span>        
-        </div>
-      </div>
-      <div class="weather">
-        <div class="image-wrapper">  
-          <img
-            src="http://openweathermap.org/img/wn/${
-              current.weather[0].icon
-            }@4x.png">
-        </div>
-        <div class="temp">
-          ${Math.round(current.temp)}<span class="units">&degF</span>
-        </div>
-      </div>
-    </div>  
-    <div class="card description">
-      <div class="wrapper">
-        <div class="high-temp">High: ${today.temp.max}&deg;F</div>
-        <div class="low-temp">Low: ${today.temp.min}&deg;F</div>
-        <div class="rain">Rain: ${today.pop}%</div>
-        <div class="wind">Wind: ${current.wind_speed}m/h</div>
-        <div class="humidity">Humidity: ${current.humidity}%</div>
-        <div class="visibility">Visibility: ${current.visibility}m</div>
-        <div class="sunrise">Sunrise ${sunrise.getHours()}:${sunrise.getMinutes()} AM</div>
-        <div class="sunset">Sunset ${
-          sunset.getHours() > 12 ? sunset.getHours() - 12 : sunset.getHours()
-        }:${sunset.getMinutes()} PM
-        </div>
-      </div>
-    </div>
+    <div class="card overview">${overview}</div>  
+    <div class="card description">${description}</div>
     <div class="card five-day">${fiveDayForecast}</div>
     <div class="card hourly">${hourlyForecast}</div>
     <div class="card other">Other</div>
