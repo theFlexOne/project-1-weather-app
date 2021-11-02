@@ -1,47 +1,28 @@
-import { OPEN_WEATHER_API_KEY, GOOGLE_API_KEY } from "./api-keys.js";
-
-const parseDayOfTheWeek = num => {
-  switch (num) {
-    case 0:
-      return "Sun";
-    case 1:
-      return "Mon";
-    case 2:
-      return "Tue";
-    case 3:
-      return "Wed";
-    case 4:
-      return "Thu";
-    case 5:
-      return "Fri";
-    case 6:
-      return "Sat";
-    default:
-      throw new Error("num is invalid - num must be between 0-6");
-  }
-};
+import { OPEN_WEATHER_API_KEY, GOOGLE_API_KEY } from './api-keys.js'; // api-keys are kept hidden and ignored by git
 
 const initApp = () => {
-  const PLACES_API_ENDPOINT = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?";
+  const PLACES_API_ENDPOINT =
+    'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?'; // cors issue with this endpoint. bypass cors with a browser extension or some other method
   const OPEN_WEATHER_API_ENDPOINT =
-    "https://api.openweathermap.org/data/2.5/onecall?";
+    'https://api.openweathermap.org/data/2.5/onecall?';
   const GEOCODE_API_ENDPOINT =
-    "https://maps.googleapis.com/maps/api/geocode/json?";
+    'https://maps.googleapis.com/maps/api/geocode/json?';
 
-  const searchForm = document.querySelector("header form");
-  const searchBox = document.querySelector("#searchBox");
-  const userLocationButton = document.querySelector("#userLocationButton");
-  const weatherCards = document.querySelector("main");
-  const body = document.querySelector("body")
+  const searchForm = document.querySelector('header form');
+  const searchBox = document.querySelector('#searchBox');
+  const userLocationButton = document.querySelector('#userLocationButton');
+  const weatherCards = document.querySelector('main');
+  const body = document.querySelector('body');
 
   const displayWeather = (weatherData, location) => {
-    console.dir(weatherData);
-    // console.log({ location });
+    // console.dir(weatherData);
+    console.log('location -> ', { location });
     const locationName = `
       <span class="city">${location[0]}</span>
       </br>
-      <span class="state">${location[1] || ""}</span>
-      `;
+      <span class="state">${location[1] || ''}</span>
+    `;
+    console.log('locationName -> ', { locationName });
 
     const today = weatherData.daily[0];
     const current = weatherData.current;
@@ -49,25 +30,16 @@ const initApp = () => {
     const sunrise = new Date(today.sunrise * 1000);
     const sunset = new Date(today.sunset * 1000);
 
-    console.log({ sunrise }, { sunset });
+    // console.log("sunrise -> " + { sunrise }, "sunset -> " +  { sunset });
 
-    const dateStrObject = (() => {
-      // let weekday, month, dayNum, year;
-      let [weekday, ...date] = new Date().toDateString().split(" ");
-      date = date.join(",");
-      console.log(weekday, date);
-      return {
-        weekday,
-        date
-      };
-    })();
+    const dateStr = buildDateStr();
 
     const forecastOverview = `      
       <div class="location-and-date">
         <div class="location">${locationName}</div>
         <div class="date">
-        <span class="weekday">${dateStrObject.weekday}</span>        
-        <span>${dateStrObject.date}</span>        
+        <span class="weekday">${dateStr.weekday}</span>        
+        <span>${dateStr.date}</span>        
         </div>
       </div>
       <div class="weather">
@@ -85,66 +57,46 @@ const initApp = () => {
 
     const forecastDescription = `
       <!-- <div class="wrapper"> -->
-        <div class="high-temp">High: ${today.temp.max}&deg;<span class="unit">F</span></div>
-        <div class="low-temp">Low: ${today.temp.min}&deg;<span class="unit">F</span></div>
+        <div class="high-temp">High: ${
+          today.temp.max
+        }&deg;<span class="unit">F</span></div>
+        <div class="low-temp">Low: ${
+          today.temp.min
+        }&deg;<span class="unit">F</span></div>
         <div class="rain">Rain: ${today.pop}%</div>
         <div class="wind">Wind: ${current.wind_speed} m/h</div>
         <div class="humidity">Humidity: ${current.humidity}%</div>
         <div class="visibility">Visibility: ${current.visibility / 100}%</div>
         <div class="sunrise">Sunrise: ${sunrise.getHours()}:${
-          (sunrise.getMinutes() < 10 ? "0" : "") + sunrise.getMinutes()
-        } AM
+      (sunrise.getMinutes() < 10 ? '0' : '') + sunrise.getMinutes()
+    } AM
         </div>
         <div class="sunset">Sunset: ${
           sunset.getHours() > 12 ? sunset.getHours() - 12 : sunset.getHours()
-        }:${(sunset.getMinutes() < 10 ? "0" : "") + sunset.getMinutes()} PM
+        }:${(sunset.getMinutes() < 10 ? '0' : '') + sunset.getMinutes()} PM
         </div>
       <!-- </div> -->
     `;
 
-    const fiveDayForecast = (() => {
-      const fiveDays = weatherData.daily.slice(1, 6);
-      const divs = [];
-      fiveDays.forEach(day => {
-        console.log(day);
-        const {
-          pop: rain,
-          temp: { min },
-          temp: { max },
-          dt: date
-        } = day;
-        let dayOfTheWeek = new Date(date * 1000).toString().split(" ")[0];
-        // dayOfTheWeek = parseDayOfTheWeek(dayOfTheWeek);
-        console.log(dayOfTheWeek);
-        const iconURL = `http://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
-        const div = `
-          <div class="day">
-            <span class="day-of-the-week">${dayOfTheWeek}</span>
-            <img src="${iconURL}">
-            <span>
-              ${min}&deg;<span class="unit">F</span> - ${max}&deg;<span class="unit">F</span>
-            </span>
-          </div>`;
-        divs.push(div);
-      });
-      return divs.join("");
-    })();
+    const fiveDayForecast = getFiveDayForecast(weatherData);
 
     const hourlyForecast = (() => {
       const twelveHours = weatherData.hourly.slice(1, 13);
       const divs = [];
-      const parseHours = (hours) => {
-        let hoursString = ""
-        if (hours > 12) hoursString += (hours - 12 + " PM")
-        else hoursString += hours + (hours === 12 ? " PM" : " AM")
+      const parseHours = hours => {
+        let hoursString = '';
+        if (hours > 12) hoursString += hours - 12 + ' PM';
+        else hoursString += hours + (hours === 12 ? ' PM' : ' AM');
         return hoursString;
-      }
-      twelveHours.forEach(({temp, dt}) => {
-        const hours = new Date(dt * 1000).getHours()
-        const div = `<span>${parseHours(hours)} | ${temp}&deg;<span class="unit">F</span></span>`;
+      };
+      twelveHours.forEach(({ temp, dt }) => {
+        const hours = new Date(dt * 1000).getHours();
+        const div = `<span>${parseHours(
+          hours
+        )} | ${temp}&deg;<span class="unit">F</span></span>`;
         divs.push(div);
       });
-      return divs.join("");
+      return divs.join('');
     })();
 
     const html = `
@@ -155,14 +107,16 @@ const initApp = () => {
       <div class="card other">Other</div>
     `;
 
-    if (Date.now() < sunset && Date.now() > sunrise) body.style.backgroundImage = "url(/Images/mosi-knife--PVgDgKXgZA-unsplash-edit1.jpg)";
-    else body.style.backgroundImage = "url(/Images/night-sky-cloudy-moon.jpg)"
+    if (Date.now() < sunset && Date.now() > sunrise)
+      body.style.backgroundImage =
+        'url(/Images/mosi-knife--PVgDgKXgZA-unsplash-edit1.jpg)';
+    else body.style.backgroundImage = 'url(/Images/night-sky-cloudy-moon.jpg)';
 
     weatherCards.innerHTML = html;
   };
 
-  const fetchWeather = (lat, lon, locationName = "name") => {
-    const units = "imperial";
+  const fetchWeather = (lat, lon, locationName = 'name') => {
+    const units = 'imperial';
     const url = `${OPEN_WEATHER_API_ENDPOINT}lat=${lat}&lon=${lon}&units=${units}&lang=en&appid=${OPEN_WEATHER_API_KEY}`;
     fetch(url)
       .then(res => {
@@ -180,7 +134,7 @@ const initApp = () => {
     searchForm.reset();
     // console.log(input);
     // debugger;
-    if (input === "") return fetchUserLocationData();
+    if (input === '') return fetchUserLocationData();
     fetch(url)
       .then(res => {
         if (!res.ok) throw new Error(res.statusText);
@@ -190,8 +144,7 @@ const initApp = () => {
         // console.log(data);
         const lat = data.candidates[0].geometry.location.lat.toPrecision(4);
         const lon = data.candidates[0].geometry.location.lng.toPrecision(4);
-        const locationName = data.candidates[0].formatted_address.split(" ");
-        console.log(locationName);
+        const locationName = data.candidates[0].formatted_address.split(' ');
         // console.log(locationName);
         return fetchWeather(lat, lon, locationName);
       })
@@ -209,8 +162,8 @@ const initApp = () => {
         // console.log(data);
         const addressComponents = data.results.find(result => {
           if (
-            result.types[0] === "locality" &&
-            result.types[1] === "political" &&
+            result.types[0] === 'locality' &&
+            result.types[1] === 'political' &&
             result.types.length === 2
           ) {
             return true;
@@ -219,7 +172,7 @@ const initApp = () => {
         // console.log(addressComponents);
         const locationName = [
           addressComponents[0].long_name,
-          addressComponents[2].long_name
+          addressComponents[2].long_name,
         ];
         return fetchWeather(lat, lon, locationName);
       })
@@ -240,15 +193,53 @@ const initApp = () => {
   //   movieQuote.innerHTML = getRdmMovieQuote();
   // }
 
+  const buildDateStr = () => {
+    let [weekday, ...date] = new Date().toDateString().split(' ');
+    date = date.join(',');
+    console.log(weekday, date);
+    return {
+      weekday,
+      date,
+    };
+  };
+
+  const getFiveDayForecast = weatherData => {
+    const fiveDays = weatherData.daily.slice(1, 6);
+    const divs = [];
+    fiveDays.forEach(day => {
+      // console.log(day);
+      const {
+        pop: rain,
+        temp: { min },
+        temp: { max },
+        dt: date,
+      } = day;
+      const dayOfTheWeek = new Date(date * 1000).toString().split(' ')[0];
+      // dayOfTheWeek = parseDayOfTheWeek(dayOfTheWeek);
+      // console.log(dayOfTheWeek);
+      const iconURL = `http://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
+      const div = `
+        <div class="day">
+          <span class="day-of-the-week">${dayOfTheWeek}</span>
+          <img src="${iconURL}">
+          <span>
+            ${min}&deg;<span class="unit">F</span> - ${max}&deg;<span class="unit">F</span>
+          </span>
+        </div>`;
+      divs.push(div);
+    });
+    return divs.join('');
+  };
+
   //*event listeners:
 
-  searchForm.addEventListener("submit", fetchInputLocationData);
-  userLocationButton.addEventListener("click", fetchUserLocationData);
+  searchForm.addEventListener('submit', fetchInputLocationData);
+  userLocationButton.addEventListener('click', fetchUserLocationData);
 
   fetchUserLocationData();
   // displayRdmMovieQuotes();
   // searchBox.focus();
 };
 
-document.addEventListener("DOMContentLoaded", initApp);
+document.addEventListener('DOMContentLoaded', initApp);
 // initApp();
