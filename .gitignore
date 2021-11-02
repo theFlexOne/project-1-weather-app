@@ -7,3 +7,4 @@ Images/other images
 netlify.toml
 .env
 netlify/functions
+templates.html
