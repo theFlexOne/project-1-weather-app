@@ -21,7 +21,7 @@
 }
 
 body {
-  background-image: url(../Images/night-sky-trees.jpg);
+  background-image: url(../Images/mosi-knife--PVgDgKXgZA-unsplash-edit1.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -224,21 +224,51 @@ main > * {
 .overview .temp {
   align-self: flex-end;
   font-size: 4rem;
-}
-
-.temp .units {
-  font-size: 1.5rem;
-}
-
-.description {
   display: flex;
+  align-items: flex-start;
+}
+
+.temp .unit {
+  font-size: 1.5rem;
+  padding-top: .65rem;
+}
+
+.description, .hourly {
+  display: flex;
+  flex-wrap: nowrap;
   flex-direction: column;
   text-align: center;
   justify-content: space-between;
 }
 
-.description * {
-  border: 1px solid black;
+.description > *, .hourly > * {
+  background-color: rgba(56, 60, 77, .5);
+  border-top: 1px solid rgb(84, 90, 116);
+  border-bottom: 1px solid rgb(84, 90, 116);
+}
+
+.description .unit {
+  font-size: .75em;
+}
+
+.five-day {
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+}
+
+.five-day > * {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-right: 1rem;
+  padding-bottom: .1rem;
+  font-weight: bold;
+  border-bottom: 1px solid rgb(84, 90, 116);
+}
+
+.five-day :last-child {
+  border-bottom: none;
 }
 
 /* 
@@ -258,6 +288,10 @@ main > * {
 .image-temp-row > span {
   font-size: 3rem;
 } */
+
+span .unit {
+  font-size: .75em;
+}
 
 footer {
   display: flex;
