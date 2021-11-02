@@ -5,8 +5,8 @@
 }
 
 :root {
-  --font-family-first: 'Titillium Web', sans-serif;
-  --font-family-second: 'Montserrat', sans-serif;
+  --font-family-first: 'Montserrat', sans-serif;
+  --font-family-second: 'Titillium Web', sans-serif;
   --font-family-third: 'Teko', sans-serif;
 
   --color-primary: rgb(56, 60, 77);
@@ -118,7 +118,7 @@ header input[type="search"]:focus {
 nav a {
   display: inline;
   padding-left: 1em;
-  font-family: var(--font-family-second);
+  font-family: var(--font-family-first);
   text-decoration: none;
   color: rgba(255, 255, 255, .70);
 }
@@ -156,7 +156,7 @@ main > * {
   flex-grow: 1;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 1fr;
-  font-family: var(--font-family-second);
+  font-family: var(--font-family-first);
   font-weight: 100;
   /* gap: 1rem; */
 }
