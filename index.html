@@ -16,8 +16,7 @@
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Teko:wght@300;400;500;600;700&family=Titillium+Web:wght@200;300;400;600;700;900&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="/css/styles.css" />
-
-  <script src="./app.js" type="module" defer></script>
+  <script src="./app.js" type="module"></script>
 </head>
 
 <body>
@@ -28,8 +27,9 @@
     <!-- <div class="search-container"> -->
     <form>
       <label for="searchBox"></label>
-      <input type="search" name="Location Search" class="search-box" id="searchBox"
-        placeholder="Search by City & State, or Zip Code" />
+      <!-- <input type="text" id="autocomplete" placeholder="Enter a place" class="search-box"> -->
+      <input type="text" name="Location Search" class="search-box" id="searchBox"
+        placeholder="Search by City & State, or Zip Code" autocomplete />
       <button type="submit" id="searchButton" class="search-button">
         <i class="material-icons-outlined">search</i>
       </button>
