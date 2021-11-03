@@ -1,6 +1,11 @@
+import { buildDateStr } from './buildDateStr.js';
+import { getFiveDayForecast } from './getFiveDayForecast.js';
+import { getHourlyForecast } from './getHourlyForecast.js';
+
 export const displayWeather = (weatherData, location) => {
   const weatherCards = document.querySelector('main');
   const body = document.querySelector('body');
+
   const locationName = `
     <span class="city">${location[0]}</span>
     </br>
@@ -13,8 +18,6 @@ export const displayWeather = (weatherData, location) => {
 
   const sunrise = new Date(today.sunrise * 1000);
   const sunset = new Date(today.sunset * 1000);
-
-  // console.log("sunrise -> " + { sunrise }, "sunset -> " +  { sunset });
 
   const dateStr = buildDateStr();
 

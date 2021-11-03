@@ -1,6 +1,6 @@
 import { OPEN_WEATHER_API_KEY, GOOGLE_API_KEY } from './api-keys.js'; // api-keys are kept hidden and ignored by git
 // import { autocomplete } from './node_modules/@algolia/autocomplete-js';
-import { displayWeather } from '';
+import { displayWeather } from './scripts/displayWeather.js';
 
 const initApp = () => {
   const PLACES_API_ENDPOINT =
@@ -13,10 +13,8 @@ const initApp = () => {
   const searchForm = document.querySelector('header form');
   const searchBox = document.querySelector('#searchBox');
   const userLocationButton = document.querySelector('#userLocationButton');
-  const weatherCards = document.querySelector('main');
-  const body = document.querySelector('body');
 
-  displayWeather(weatherData, location);
+  // displayWeather(weatherData, location);
 
   const fetchWeather = (lat, lon, locationName = 'name') => {
     const units = 'imperial';
@@ -90,66 +88,6 @@ const initApp = () => {
   //   const movieQuote = document.querySelector('#movieQuote');
   //   movieQuote.innerHTML = getRdmMovieQuote();
   // }
-
-  const buildDateStr = () => {
-    let [weekday, ...date] = new Date().toDateString().split(' ');
-    date = date.join(',');
-    console.log(weekday, date);
-    return {
-      weekday,
-      date,
-    };
-  };
-
-  const getFiveDayForecast = weatherData => {
-    const fiveDays = weatherData.daily.slice(1, 6);
-    const divs = [];
-    fiveDays.forEach(day => {
-      // console.log(day);
-      const {
-        pop: rain,
-        temp: { min },
-        temp: { max },
-        dt: date,
-      } = day;
-      const dayOfTheWeek = new Date(date * 1000).toString().split(' ')[0];
-      // dayOfTheWeek = parseDayOfTheWeek(dayOfTheWeek);
-      // console.log(dayOfTheWeek);
-      const iconURL = `http://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
-      const div = `
-        <div class="day">
-          <span class="day-of-the-week">${dayOfTheWeek}</span>
-          <img src="${iconURL}">
-          <span>
-            ${Math.round(min)}&deg;<span class="unit">F</span> - ${Math.round(
-        max
-      )}&deg;<span class="unit">F</span>
-          </span>
-        </div>`;
-      divs.push(div);
-    });
-    return divs.join('');
-  };
-
-  const getHourlyForecast = weatherData => {
-    console.dir(weatherData.hourly);
-    const hourlyData = weatherData.hourly.slice(1, 13);
-    const divs = [];
-    const parseHourStr = hours => {
-      let hourStr = '';
-      if (hours > 12) hourStr += hours - 12 + ' PM';
-      else hourStr += hours + (hours === 12 ? ' PM' : ' AM');
-      return hourStr;
-    };
-    hourlyData.forEach(({ temp, dt }) => {
-      const hours = parseHourStr(new Date(dt * 1000).getHours());
-      const div = `<div>${hours} | ${Math.round(
-        temp
-      )}&deg;<span class="unit">F</span></div>`;
-      divs.push(div);
-    });
-    return divs.join('');
-  };
 
   //* **event listeners** *//
   searchForm.addEventListener('submit', fetchInputLocationData);
