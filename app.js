@@ -1,4 +1,5 @@
 import { OPEN_WEATHER_API_KEY, GOOGLE_API_KEY } from './api-keys.js'; // api-keys are kept hidden and ignored by git
+// import { autocomplete } from './node_modules/@algolia/autocomplete-js';
 
 const initApp = () => {
   const PLACES_API_ENDPOINT =
@@ -79,33 +80,17 @@ const initApp = () => {
     `;
 
     const fiveDayForecast = getFiveDayForecast(weatherData);
+    const hourlyForecast = getHourlyForecast(weatherData);
 
-    const hourlyForecast = (() => {
-      const twelveHours = weatherData.hourly.slice(1, 13);
-      const divs = [];
-      const parseHours = hours => {
-        let hoursString = '';
-        if (hours > 12) hoursString += hours - 12 + ' PM';
-        else hoursString += hours + (hours === 12 ? ' PM' : ' AM');
-        return hoursString;
-      };
-      twelveHours.forEach(({ temp, dt }) => {
-        const hours = new Date(dt * 1000).getHours();
-        const div = `<span>${parseHours(hours)} | ${Math.round(
-          temp
-        )}&deg;<span class="unit">F</span></span>`;
-        divs.push(div);
-      });
-      return divs.join('');
-    })();
+    // const html = `
+    //   <div class="card forecast-overview">${forecastOverview}</div>
+    //   <div class="card forecast-description">${forecastDescription}</div>
+    //   <div class="card five-day-forecast">${fiveDayForecast}</div>
+    //   <div class="card hourly-forecast">${hourlyForecast}</div>
+    //   <div class="card other">Other</div>
+    // `;
 
-    const html = `
-      <div class="card overview">${forecastOverview}</div>  
-      <div class="card description">${forecastDescription}</div>
-      <div class="card five-day">${fiveDayForecast}</div>
-      <div class="card hourly">${hourlyForecast}</div>
-      <div class="card other">Other</div>
-    `;
+    const html = (() => {})();
 
     if (Date.now() < sunset && Date.now() > sunrise)
       body.style.backgroundImage =
@@ -228,6 +213,26 @@ const initApp = () => {
       )}&deg;<span class="unit">F</span>
           </span>
         </div>`;
+      divs.push(div);
+    });
+    return divs.join('');
+  };
+
+  const getHourlyForecast = weatherData => {
+    console.dir(weatherData.hourly);
+    const hourlyData = weatherData.hourly;
+    const divs = [];
+    const parseHourStr = hours => {
+      let hourStr = '';
+      if (hours > 12) hourStr += hours - 12 + ' PM';
+      else hourStr += hours + (hours === 12 ? ' PM' : ' AM');
+      return hourStr;
+    };
+    hourlyData.forEach(({ temp, dt }) => {
+      const hours = parseHourStr(new Date(dt * 1000).getHours());
+      const div = `<div>${hours} | ${Math.round(
+        temp
+      )}&deg;<span class="unit">F</span></div>`;
       divs.push(div);
     });
     return divs.join('');
