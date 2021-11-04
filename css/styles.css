@@ -133,7 +133,7 @@ main {
   min-height: 75vh;
   width: min(100%, 910px);
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: auto auto;
   gap: 5% 2.5%;
   padding: 2vw;
 }
@@ -231,8 +231,7 @@ main > * {
   padding-top: 0.65rem;
 }
 
-.forecast-description,
-.hourly-forecast {
+.forecast-description {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
@@ -273,7 +272,12 @@ main > * {
   border-bottom: none;
 }
 
-.hourly-forecast
+.hourly-forecast {
+  display: grid;
+  grid-template-rows: 1fr repeat(6, 2.5fr) 1fr;
+  font-size: .75em;
+  gap: .1em;
+}
 
 /*
 .image-temp-row {
@@ -290,7 +294,7 @@ main > * {
 .image-temp-row > span {
   font-size: 3rem;
 } */
-span .unit {
+span .unitSys {
   font-size: 0.75em;
 }
 
