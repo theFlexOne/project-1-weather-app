@@ -9,6 +9,7 @@
             maximum-scale=1" />
 
   <title>Weather App</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
@@ -16,6 +17,7 @@
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Teko:wght@300;400;500;600;700&family=Titillium+Web:wght@200;300;400;600;700;900&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="/css/styles.css" />
+
   <script src="./app.js" type="module"></script>
 </head>
 
@@ -28,7 +30,7 @@
     <form>
       <label for="searchBox"></label>
       <!-- <input type="text" id="autocomplete" placeholder="Enter a place" class="search-box"> -->
-      <input type="text" name="Location Search" class="search-box" id="searchBox"
+      <input type="search" name="Location Search" class="search-box" id="searchBox"
         placeholder="Search by City & State, or Zip Code" autocomplete />
       <button type="submit" id="searchButton" class="search-button">
         <i class="material-icons-outlined">search</i>
@@ -40,7 +42,7 @@
     <!-- </div> -->
     <nav>
       <a href="https://dev.to/eric_havey">Blog</a>
-      <a href="#">Projects</a>
+      <a href="https://github.com/theFlexOne/project-1-weather-app">GitHub</a>
       <a href="#">About</a>
     </nav>
   </header>
@@ -58,6 +60,12 @@
     <h3 class="movie-quote" id="movieQuote"></h3>
   </footer>
 
+
+  <template name="overview-template"></template>
+  <template name="description-template"></template>
+  <template name="five-day-template"></template>
+  <template name="hourly-template"></template>
+  <template name="favorite-template"></template>
 </body>
 
 </html>

@@ -14,8 +14,6 @@ const initApp = () => {
   const searchBox = document.querySelector('#searchBox');
   const userLocationButton = document.querySelector('#userLocationButton');
 
-  // displayWeather(weatherData, location);
-
   const fetchWeather = (lat, lon, locationName = 'name') => {
     const units = 'imperial';
     const url = `${OPEN_WEATHER_API_ENDPOINT}lat=${lat}&lon=${lon}&units=${units}&lang=en&appid=${OPEN_WEATHER_API_KEY}`;
@@ -93,6 +91,7 @@ const initApp = () => {
   searchForm.addEventListener('submit', fetchInputLocationData);
   userLocationButton.addEventListener('click', fetchUserLocationData);
 
+  //* -> needs a guard clause to check if 'navigator.geolocation.getCurrentPosition()' is available, or user rejects request to know user's location
   fetchUserLocationData();
 };
 
