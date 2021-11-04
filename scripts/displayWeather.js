@@ -1,6 +1,6 @@
 import { buildDateStr } from './buildDateStr.js';
-import { getFiveDayForecast } from './getFiveDayForecast.js';
-import { getHourlyForecast } from './getHourlyForecast.js';
+import { buildFiveDayForecast } from './buildFiveDayForecast.js';
+import { buildHourlyForecast } from './buildHourlyForecast.js';
 
 export const displayWeather = (weatherData, location) => {
   const weatherCards = document.querySelector('main');
@@ -64,8 +64,8 @@ export const displayWeather = (weatherData, location) => {
       </div>
   `;
 
-  const fiveDayForecast = getFiveDayForecast(weatherData);
-  const hourlyForecast = getHourlyForecast(weatherData);
+  const fiveDayForecast = buildFiveDayForecast(weatherData);
+  const hourlyForecast = buildHourlyForecast(weatherData);
 
   const html = `
     <div class="card forecast-overview" id="forecastOverview">${forecastOverview}</div>

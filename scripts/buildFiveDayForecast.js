@@ -1,4 +1,4 @@
-export const getFiveDayForecast = weatherData => {
+export const buildFiveDayForecast = weatherData => {
   const fiveDays = weatherData.daily.slice(1, 6);
   const divs = [];
   fiveDays.forEach(day => {
