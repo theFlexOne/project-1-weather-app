@@ -1,6 +1,7 @@
 import { buildDateStr } from './buildDateStr.js';
 import { buildFiveDayForecast } from './buildFiveDayForecast.js';
 import { buildHourlyForecast } from './buildHourlyForecast.js';
+import { renderBackgroundImg } from './renderBackgroundImg.js';
 
 export const displayWeather = (weatherData, location) => {
   const weatherCards = document.querySelector('main');
@@ -66,6 +67,8 @@ export const displayWeather = (weatherData, location) => {
 
   const fiveDayForecast = buildFiveDayForecast(weatherData);
   const hourlyForecast = buildHourlyForecast(weatherData);
+  console.log('fiveDayForecast = ', fiveDayForecast.children);
+  console.log('hourlyForecast = ', hourlyForecast.children);
 
   const html = `
     <div class="card forecast-overview" id="forecastOverview">${forecastOverview}</div>
@@ -76,11 +79,6 @@ export const displayWeather = (weatherData, location) => {
   `;
 
   // const html = (() => {})();
-
-  if (Date.now() < sunset && Date.now() > sunrise)
-    body.style.backgroundImage =
-      'url(/Images/mosi-knife--PVgDgKXgZA-unsplash-edit1.jpg)';
-  else body.style.backgroundImage = 'url(/Images/night-sky-cloudy-moon.jpg)';
 
   weatherCards.innerHTML = html;
 };

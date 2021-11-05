@@ -14,6 +14,7 @@ const initApp = () => {
   const searchBox = document.querySelector('#searchBox');
   const userLocationButton = document.querySelector('#userLocationButton');
 
+  //TODO--> make async/await <-- //
   const fetchWeather = (lat, lon, locationName = 'name') => {
     const units = 'imperial';
     const url = `${OPEN_WEATHER_API_ENDPOINT}lat=${lat}&lon=${lon}&units=${units}&lang=en&appid=${OPEN_WEATHER_API_KEY}`;
@@ -26,7 +27,7 @@ const initApp = () => {
       .catch(console.error);
   };
 
-  //TODO make async/await
+  //TODO--> make async/await <-- //
   const fetchInputLocationData = e => {
     const input = searchBox.value;
     const url = `${PLACES_API_ENDPOINT}input=${input}&fields=formatted_address,name,geometry,place_id&inputtype=textquery&key=${GOOGLE_API_KEY}`;

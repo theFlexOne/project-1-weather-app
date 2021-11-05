@@ -13,10 +13,9 @@ export const buildHourlyForecast = weatherData => {
     const hours = parseHourStr(new Date(dt * 1000).getHours());
     const div = document.createElement('DIV');
     const span = document.createElement('SPAN');
-    // const text = document.createTextNode(`${hours} --- ${Math.round(temp)}`);
 
     span.className = 'unitSys';
-    span.textContent = 'F';
+    span.textContent = '&deg;F';
     div.append(`${hours} --- ${Math.round(temp)}`, span);
     docFrag.appendChild(div);
   });
