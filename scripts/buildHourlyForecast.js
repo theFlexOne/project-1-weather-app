@@ -1,6 +1,6 @@
 export const buildHourlyForecast = weatherData => {
   console.dir(weatherData.hourly);
-  const hourlyData = weatherData.hourly.slice();
+  const hourlyData = weatherData.hourly.slice(0, 6);
   const docFrag = document.createDocumentFragment();
   // const divs = [];
   const parseHourStr = hours => {

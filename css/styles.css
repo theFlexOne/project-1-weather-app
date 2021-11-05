@@ -177,15 +177,15 @@ main > * {
   max-width: 70%;
 }
 
-.location .city {
+.location {
   font-size: 2.25rem;
   font-weight: 200;
 }
 
-.location .state {
+/* .location {
   font-size: 1.25rem;
   font-weight: 200;
-}
+} */
 
 .date {
   font-size: 1.15rem;

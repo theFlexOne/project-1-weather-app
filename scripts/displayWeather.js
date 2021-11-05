@@ -62,25 +62,34 @@ export const displayWeather = (weatherData, location) => {
 
   const fiveDayForecast = buildFiveDayForecast(weatherData);
   const hourlyForecast = buildHourlyForecast(weatherData);
-  console.log('fiveDayForecast = ', fiveDayForecast.children);
-  console.log('hourlyForecast = ', hourlyForecast.children);
+  // console.log('fiveDayForecast = ', fiveDayForecast.children);
+  // console.log('hourlyForecast = ', hourlyForecast.children);
 
-  const html = (() => {
-    const mainClone = document.querySelector('main').cloneNode('false');
-    console.log(mainClone);
+  const htmlFrag = (() => {
+    const docFrag = document.createDocumentFragment();
+    const cardClones = document
+      .querySelector('main')
+      .cloneNode('false').children;
+    console.log(cardClones);
 
     const [overview, description, fiveDay, hourly, bookmarked] = [
-      ...mainClone.children,
+      ...cardClones,
     ];
-    console.log(overview, description, fiveDay, hourly, bookmarked);
-    overview.append(forecastOverview);
-    description.append(forecastDescription);
+    // console.log(overview, description, fiveDay, hourly, bookmarked);
+    overview.innerHTML = forecastOverview;
+    description.innerHTML = forecastDescription;
     fiveDay.append(fiveDayForecast);
     hourly.append(hourlyForecast);
-    console.log(overview, description, fiveDay, hourly, bookmarked);
+    console.log([overview, description, fiveDay, hourly, bookmarked]);
 
-    console.log(mainClone);
+    docFrag.append(...cardClones);
+    console.log(docFrag);
+    // console.log(cardClones);
+    // return cardClones;
+    return docFrag;
   })();
+
+  console.log(htmlFrag);
 
   /* 
   const html = `
@@ -91,6 +100,6 @@ export const displayWeather = (weatherData, location) => {
     <div class="card bookmarked-location" id="bookmarkedLocation">Bookmarked Location **COMING SOON**</div>
   `:
   */
-
-  // weatherCards.innerHTML = html;
+  weatherCards.innerHTML = '';
+  weatherCards.appendChild(htmlFrag);
 };
