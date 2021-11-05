@@ -7,25 +7,20 @@ export const displayWeather = (weatherData, location) => {
   const weatherCards = document.querySelector('main');
   const body = document.querySelector('body');
 
-  const locationName = `
-    <span class="city">${location[0]}</span>
-    </br>
-    <span class="state">${location[1] || ''}</span>
-  `;
-  // console.log('locationName -> ', { locationName });
-
   const today = weatherData.daily[0];
   const current = weatherData.current;
 
   const sunrise = new Date(today.sunrise * 1000);
   const sunset = new Date(today.sunset * 1000);
 
+  const locationName = location.split(', ');
+
   const dateStr = buildDateStr();
 
   //* HTML *//
   const forecastOverview = `      
     <div class="location-and-date">
-      <div class="location">${locationName}</div>
+      <div class="location">${locationName.join(' ')}</div>
       <div class="date">
       <span class="weekday">${dateStr.weekday}</span>        
       <span>${dateStr.date}</span>        
@@ -70,15 +65,32 @@ export const displayWeather = (weatherData, location) => {
   console.log('fiveDayForecast = ', fiveDayForecast.children);
   console.log('hourlyForecast = ', hourlyForecast.children);
 
+  const html = (() => {
+    const mainClone = document.querySelector('main').cloneNode('false');
+    console.log(mainClone);
+
+    const [overview, description, fiveDay, hourly, bookmarked] = [
+      ...mainClone.children,
+    ];
+    console.log(overview, description, fiveDay, hourly, bookmarked);
+    overview.append(forecastOverview);
+    description.append(forecastDescription);
+    fiveDay.append(fiveDayForecast);
+    hourly.append(hourlyForecast);
+    console.log(overview, description, fiveDay, hourly, bookmarked);
+
+    console.log(mainClone);
+  })();
+
+  /* 
   const html = `
     <div class="card forecast-overview" id="forecastOverview">${forecastOverview}</div>
     <div class="card forecast-description" id="forecastDescription">${forecastDescription}</div>
     <div class="card five-day-forecast" id="hourlyForecast">${fiveDayForecast}</div>
     <div class="card hourly-forecast" id="hourlyForecast">${hourlyForecast}</div>
     <div class="card bookmarked-location" id="bookmarkedLocation">Bookmarked Location **COMING SOON**</div>
-  `;
+  `:
+  */
 
-  // const html = (() => {})();
-
-  weatherCards.innerHTML = html;
+  // weatherCards.innerHTML = html;
 };
