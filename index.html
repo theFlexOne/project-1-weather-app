@@ -60,11 +60,21 @@
   </footer>
 
 
-  <template name="overview-template"></template>
-  <template name="description-template"></template>
-  <template name="five-day-template"></template>
-  <template name="hourly-template"></template>
-  <template name="favorite-template"></template>
+  <template id="overview-template"></template>
+  <template id="description-template"></template>
+
+  <template id="fiveDayTemplate">
+    <div class="day">
+      <p class="day-of-the-week"></p>
+      <img src="#" class="day-weather">
+      <p class="temperature">
+        <span class="unitSys"></span>
+      </p>
+    </div>
+  </template>
+
+  <template id="hourly-template"></template>
+  <template id="favorite-template"></template>
 </body>
 
 </html>
