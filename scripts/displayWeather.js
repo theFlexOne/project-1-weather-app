@@ -34,7 +34,7 @@ export const displayWeather = (weatherData, location) => {
           }@4x.png">
       </div>
       <div class="temp">
-        ${Math.round(current.temp)}<span class="unit">&deg;F</span>
+        ${Math.round(current.temp)}<span class="unit">°F</span>
       </div>
     </div>
 `;
@@ -42,10 +42,10 @@ export const displayWeather = (weatherData, location) => {
   const forecastDescription = `
       <div class="high-temp">High: ${Math.round(
         today.temp.max
-      )}&deg;<span class="unit">F</span></div>
+      )}<span class="unit">°F</span></div>
       <div class="low-temp">Low: ${Math.round(
         today.temp.min
-      )}&deg;<span class="unit">F</span></div>
+      )}<span class="unit">°F</span></div>
       <div class="rain">Rain: ${today.pop}%</div>
       <div class="wind">Wind: ${current.wind_speed} m/h</div>
       <div class="humidity">Humidity: ${current.humidity}%</div>
@@ -70,7 +70,7 @@ export const displayWeather = (weatherData, location) => {
     const cardClones = document
       .querySelector('main')
       .cloneNode('false').children;
-    console.log(cardClones);
+    // console.log(cardClones);
 
     const [overview, description, fiveDay, hourly, bookmarked] = [
       ...cardClones,
@@ -78,18 +78,20 @@ export const displayWeather = (weatherData, location) => {
     // console.log(overview, description, fiveDay, hourly, bookmarked);
     overview.innerHTML = forecastOverview;
     description.innerHTML = forecastDescription;
+    fiveDay.innerHTML = '';
     fiveDay.append(fiveDayForecast);
+    hourly.innerHTML = '';
     hourly.append(hourlyForecast);
-    console.log([overview, description, fiveDay, hourly, bookmarked]);
+    // console.log([overview, description, fiveDay, hourly, bookmarked]);
 
     docFrag.append(...cardClones);
-    console.log(docFrag);
+    // console.log(docFrag);
     // console.log(cardClones);
     // return cardClones;
     return docFrag;
   })();
 
-  console.log(htmlFrag);
+  // console.log(htmlFrag);
 
   /* 
   const html = `

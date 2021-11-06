@@ -1,5 +1,4 @@
-import { OPEN_WEATHER_API_KEY, GOOGLE_API_KEY } from './api-keys.js'; // api-keys are kept hidden and ignored by git
-// import { autocomplete } from './node_modules/@algolia/autocomplete-js';
+// import { autocomplete } from './node_modules/@algolia/autocomplete-js'; // <-- A future component
 import { displayWeather } from './scripts/displayWeather.js';
 import { fetchUserLocationData } from './scripts/fetchUserLocationData.js';
 import { fetchUserLocationName } from './scripts/fetchUserLocationName.js';
@@ -10,18 +9,29 @@ const initApp = async () => {
   const userLocationButton = document.querySelector('#userLocationButton');
   const searchForm = document.querySelector('form');
 
-  const { latitude: lat, longitude: lon } = (await fetchUserLocationData())
-    .coords;
+  const compileUserForecast = async () => {
+    // debugger;
+    const { latitude: lat, longitude: lon } = (await fetchUserLocationData())
+      .coords;
 
-  // code is blocking, for now... Can be done asynchronously
-  const placeName = await fetchUserLocationName(lat, lon);
-  const weatherData = await fetchWeather(lat, lon);
+    // code is blocking, for now... Can be done asynchronously
+    const placeName = await fetchUserLocationName(lat, lon);
+    const weatherData = await fetchWeather(lat, lon);
+    return displayWeather(weatherData, placeName);
+  };
 
-  displayWeather(weatherData, placeName);
+  const compileInputForecast = async e => {
+    e.preventDefault();
+    const { lat, lon, address } = await fetchInputLocationData();
+    const weatherData = await fetchWeather(lat, lon);
+    return displayWeather(weatherData, address);
+  };
+
+  compileUserForecast();
 
   // console.dir(searchForm);
-  searchForm.addEventListener('submit', fetchInputLocationData);
-  userLocationButton.addEventListener('click', fetchUserLocationData);
+  searchForm.addEventListener('submit', compileInputForecast);
+  userLocationButton.addEventListener('click', compileUserForecast);
 };
 
 document.addEventListener('DOMContentLoaded', initApp);

@@ -9,6 +9,7 @@ export const fetchUserLocationData = (options = {}) => {
     throw new Error(error);
   };
 
+  //TODO - FIX THIS
   return new Promise((success, error) => {
     navigator.geolocation.getCurrentPosition(success, error, options);
   });

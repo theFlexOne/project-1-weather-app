@@ -1,23 +1,17 @@
-export const fetchInputLocationData = async (e, searchInput = 'boston') => {
-  e.preventDefault();
+import { GOOGLE_API_KEY } from '../api-keys.js'; // <-- api-keys.js is ignored by git
+
+export const fetchInputLocationData = async () => {
   const PLACES_API_ENDPOINT =
     'https://maps.googleapis.com/maps/api/place/findplacefromtext/json'; // cors issue with this endpoint. bypass cors with a browser extension or some other method
-  searchInput = document.querySelector('#searchBox');
-  const query = `
-    ?input=${searchInput}
-    &fields=
-      formatted_address,
-      name,
-      geometry,
-      place_id
-    &inputtype=textquery
-    &key=AIzaSyADrFtaYwJruW8fmm656rWb8Br1kZD46Xk
-  `;
+  const searchInput = document.querySelector('#searchBox').value || 'london';
+  const query = `?input=${searchInput}&fields=formatted_address,name,geometry,place_id&inputtype=textquery&key=${GOOGLE_API_KEY}`;
   const url = PLACES_API_ENDPOINT + query;
-  const placesData = await (await fetch(url)).json();
-  const candidate = placesData.candidates[0];
-  console.log(candidate);
-  const { lat, lng: lon } = candidate.geometry.location;
-  const place_id = candidate.place_id;
-  return { place_id, lat, lon };
+  const places = await (await fetch(url)).json();
+  const place = places.candidates[0];
+  console.log(places);
+  console.log(place);
+  const { lat, lng: lon } = place.geometry.location;
+  const address = place.formatted_address;
+  const place_id = place.place_id;
+  return { lat, lon, address };
 };

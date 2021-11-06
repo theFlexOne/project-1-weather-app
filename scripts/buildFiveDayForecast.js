@@ -22,7 +22,6 @@ export const buildFiveDayForecast = weatherData => {
     const img = document.createElement('IMG');
     const span2 = createSpan();
     const span3 = createSpan();
-    const span4 = createSpan();
 
     div.className = 'day wrapper';
     span1.className = 'day-name';
@@ -30,13 +29,11 @@ export const buildFiveDayForecast = weatherData => {
     img.src = `http://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
     span2.textContent = `${Math.round(min)}`;
     span3.className = 'unitSys';
-    span4.className = 'unitSys';
-    span3.textContent = '&deg;F';
-    span4.textContent = '&deg;F';
+    span3.innerText = '°F';
 
     span2.appendChild(span3);
     div.append(span1, img, span2);
-    console.dir(div.childNodes);
+    // console.dir(div.childNodes);
     return docFrag.append(div);
   });
   return docFrag;
@@ -46,9 +43,9 @@ export const buildFiveDayForecast = weatherData => {
 //     <span class="day-name">${dayName}</span>
 //     <img src="${iconURL}">
 //     <span>
-//       ${Math.round(min)}&deg;<span class="unitSys">F</span> - ${Math.round(
+//       ${Math.round(min)}<span class="unitSys">°F</span> - ${Math.round(
 //   max
-// )}&deg;<span class="unit">F</span>
+// )}<span class="unit">°F</span>
 //     </span>
 //   </div>`;
 // divs.push(div);

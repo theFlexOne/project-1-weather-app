@@ -1,5 +1,5 @@
 export const buildHourlyForecast = weatherData => {
-  console.dir(weatherData.hourly);
+  // console.dir(weatherData.hourly);
   const hourlyData = weatherData.hourly.slice(0, 6);
   const docFrag = document.createDocumentFragment();
   // const divs = [];
@@ -15,7 +15,7 @@ export const buildHourlyForecast = weatherData => {
     const span = document.createElement('SPAN');
 
     span.className = 'unitSys';
-    span.textContent = '&deg;F';
+    span.textContent = '°F';
     div.append(`${hours} --- ${Math.round(temp)}`, span);
     docFrag.appendChild(div);
   });
