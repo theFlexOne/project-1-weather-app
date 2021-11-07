@@ -1,3 +1,5 @@
+const body = document.querySelector('body');
+
 export const renderBackgroundImg = (sunrise, sunset) => {
   if (Date.now() < sunset && Date.now() > sunrise)
     body.style.backgroundImage =
