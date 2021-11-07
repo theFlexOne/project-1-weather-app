@@ -273,10 +273,48 @@ main > * {
 }
 
 .hourly-forecast {
-  display: grid;
-  grid-template-rows: 1fr repeat(6, 2.5fr) 1fr;
+  display: flex;
+  flex-direction: column;
   font-size: .75em;
-  gap: .1em;
+}
+
+.hourly-forecast .material-icons-outlined {
+  font-size: .75rem;
+}
+
+.top-buttons, .btm-buttons {
+  height: 1.25rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.top-buttons *, .btm-buttons * {
+  width: 100%;
+}
+
+.top-buttons {
+  justify-self: flex-start;
+}
+
+.hours-wrapper {
+  display: flex;
+  flex-direction: inherit;
+  flex-grow: 1;
+  justify-content: space-between;
+  text-align: center;
+  
+}
+
+.hours-wrapper > :first-child {
+  border-top: 2px solid hsl(227, 22%, 20%);
+}
+
+.hours-wrapper > * {
+  border-bottom: 2px solid hsl(227, 22%, 20%);
+}
+
+.btm-buttons {
+  justify-self: flex-end;
 }
 
 /*

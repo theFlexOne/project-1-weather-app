@@ -60,48 +60,41 @@ export const displayWeather = (weatherData, location) => {
       </div>
   `;
 
+  const docFrag = document.createDocumentFragment();
+  const cardClones = document.querySelector('main').cloneNode('false').children;
+  const btmButtons = document.querySelector('#btmButtons');
+
   const fiveDayForecast = buildFiveDayForecast(weatherData);
   const hourlyForecast = buildHourlyForecast(weatherData);
   // console.log('fiveDayForecast = ', fiveDayForecast.children);
   // console.log('hourlyForecast = ', hourlyForecast.children);
 
   const htmlFrag = (() => {
-    const docFrag = document.createDocumentFragment();
-    const cardClones = document
-      .querySelector('main')
-      .cloneNode('false').children;
     // console.log(cardClones);
 
-    const [overview, description, fiveDay, hourly, bookmarked] = [
-      ...cardClones,
-    ];
-    // console.log(overview, description, fiveDay, hourly, bookmarked);
+    const [
+      overview,
+      description,
+      fiveDay,
+      {
+        children: [, hours],
+      },
+      bookmarked,
+    ] = [...cardClones];
+
+    console.log({ hours });
+
     overview.innerHTML = forecastOverview;
     description.innerHTML = forecastDescription;
     fiveDay.innerHTML = '';
     fiveDay.append(fiveDayForecast);
-    hourly.innerHTML = '';
-    hourly.append(hourlyForecast);
-    // console.log([overview, description, fiveDay, hourly, bookmarked]);
+    hours.innerHTML = '';
+    hours.append(hourlyForecast);
 
     docFrag.append(...cardClones);
-    // console.log(docFrag);
-    // console.log(cardClones);
-    // return cardClones;
     return docFrag;
   })();
 
-  // console.log(htmlFrag);
-
-  /* 
-  const html = `
-    <div class="card forecast-overview" id="forecastOverview">${forecastOverview}</div>
-    <div class="card forecast-description" id="forecastDescription">${forecastDescription}</div>
-    <div class="card five-day-forecast" id="hourlyForecast">${fiveDayForecast}</div>
-    <div class="card hourly-forecast" id="hourlyForecast">${hourlyForecast}</div>
-    <div class="card bookmarked-location" id="bookmarkedLocation">Bookmarked Location **COMING SOON**</div>
-  `:
-  */
   weatherCards.innerHTML = '';
   weatherCards.appendChild(htmlFrag);
 };

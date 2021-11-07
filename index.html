@@ -51,12 +51,32 @@
     <section class="card forecast-overview"></section>
     <section class="card forecast-description"></section>
     <section class="card five-day-forecast"></section>
-    <section class="card hourly-forecast"></section>
+    <section class="card hourly-forecast">
+      <div class="top-buttons" id="topButtons">
+        <button id="prevHour"><span class="material-icons-outlined">
+            keyboard_arrow_up
+          </span></button>
+        <button id="prevPage"><i class="material-icons-outlined">
+            keyboard_double_arrow_up
+          </i></button>
+      </div>
+      <div class="hours-wrapper" id="hoursWrapper">
+
+      </div>
+      <div class="btm-buttons" id="btmButtons">
+        <button id="nextHour"><span class="material-icons-outlined">
+            keyboard_arrow_down
+          </span></button>
+        <button id="nextPage"><span class="material-icons-outlined">
+            keyboard_double_arrow_down
+          </span></button>
+      </div>
+    </section>
     <section class="card bookmarked"></section>
 
   </main>
 
-  <footer>
+  <footer hidden>
     <h3 class="movie-quote" id="movieQuote"></h3>
   </footer>
 
