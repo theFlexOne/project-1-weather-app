@@ -8,3 +8,4 @@ netlify.toml
 .env
 netlify/functions
 templates.html
+.vscode
