@@ -5,7 +5,6 @@ import { renderBackgroundImg } from './renderBackgroundImg.js';
 
 export const displayWeather = (weatherData, location) => {
   const weatherCards = document.querySelector('main');
-  const body = document.querySelector('body');
 
   const today = weatherData.daily[0];
   const current = weatherData.current;
@@ -15,7 +14,8 @@ export const displayWeather = (weatherData, location) => {
 
   const locationName = location.split(', ');
 
-  const dateStr = buildDateStr();
+  const dateStr = buildDateStr(weatherData);
+  console.log(dateStr);
 
   //* HTML *//
   const forecastOverview = `      
@@ -97,4 +97,5 @@ export const displayWeather = (weatherData, location) => {
 
   weatherCards.innerHTML = '';
   weatherCards.appendChild(htmlFrag);
+  renderBackgroundImg(sunrise, sunset);
 };

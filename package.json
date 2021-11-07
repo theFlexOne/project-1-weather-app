@@ -13,6 +13,7 @@
   "dependencies": {
     "@algolia/autocomplete-js": "^1.5.0",
     "@googlemaps/js-api-loader": "^1.12.7",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "moment": "^2.29.1"
   }
 }
