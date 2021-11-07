@@ -3,6 +3,7 @@ import { compileInputForecast } from './scripts/compileInputForecast.js';
 import { compileUserForecast } from './scripts/compileUserForecast.js';
 
 const initApp = async () => {
+  // debugger;
   const userLocationButton = document.querySelector('#userLocationButton');
   const searchForm = document.querySelector('form');
 

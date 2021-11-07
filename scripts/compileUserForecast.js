@@ -11,5 +11,6 @@ export const compileUserForecast = async () => {
   // code is blocking, for now... Can be done asynchronously
   const placeName = await fetchUserLocationName(lat, lon);
   const weatherData = await fetchWeather(lat, lon);
+  console.log(weatherData, placeName);
   return displayWeather(weatherData, placeName);
 };
