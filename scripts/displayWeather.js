@@ -2,8 +2,19 @@ import { buildDateStr } from './buildDateStr.js';
 import { buildFiveDayForecast } from './buildFiveDayForecast.js';
 import { buildHourlyForecast } from './buildHourlyForecast.js';
 import { renderBackgroundImg } from './renderBackgroundImg.js';
+import { formatDay } from './formatDay.js';
+
+const cardTemplates = document.querySelectorAll('template');
+
+const buildForecastOverview = (data, template = 0) => {
+  const overviewTemplate = cardTemplates[template].cloneNode(true);
+  console.log(overviewTemplate);
+
+  return {};
+};
 
 export const displayWeather = (weatherData, location) => {
+  buildForecastOverview(weatherData);
   const weatherCards = document.querySelector('main');
 
   const today = weatherData.daily[0];
@@ -14,16 +25,23 @@ export const displayWeather = (weatherData, location) => {
 
   const locationName = location.split(', ');
 
-  const dateStr = buildDateStr(weatherData);
-  console.log(dateStr);
+  let [dayName, month, day, year] = buildDateStr(weatherData)
+    .toString()
+    .split(' ')
+    .slice(0, 4);
+
+  day = formatDay(day);
+
+  const monthDayYear = `${month} ${day}, ${year}`;
+  console.log(monthDayYear);
 
   //* HTML *//
-  const forecastOverview = `      
+  /*   const forecastOverview = `      
     <div class="location-and-date">
       <div class="location">${locationName.join(' ')}</div>
       <div class="date">
-      <span class="weekday">${dateStr.weekday}</span>        
-      <span>${dateStr.date}</span>        
+      <span class="dayName">${dayName}</span>        
+      <span>${monthDayYear}</span>        
       </div>
     </div>
     <div class="weather">
@@ -37,7 +55,7 @@ export const displayWeather = (weatherData, location) => {
         ${Math.round(current.temp)}<span class="unit">°F</span>
       </div>
     </div>
-`;
+`; */
 
   const forecastDescription = `
       <div class="high-temp">High: ${Math.round(

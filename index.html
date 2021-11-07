@@ -81,23 +81,44 @@
     <h3 class="movie-quote" id="movieQuote"></h3>
   </footer>
 
+  <section id="templateContainers">
+    <template id="overvieTemplate">
+      <div class="location-and-date">
+        <div class="location"></div>
+        <div class="date">
+          <span class="dayName"></span>
+          <span></span>
+        </div>
+      </div>
+      <div class="weather">
+        <div class="image-wrapper">
+          <img src="#">
+        </div>
+        <div class="temp">
+          <span class="unit">°F</span>
+        </div>
+      </div>
 
-  <template id="overview-template"></template>
-  <template id="description-template"></template>
+    </template>
 
-  <template id="fiveDayTemplate">
-    <div class="day">
-      <p class="day-of-the-week"></p>
-      <img src="#" class="day-weather">
-      <p class="temperature">
-        <span class="unitSys"></span>
-      </p>
-    </div>
-  </template>
+    <template id="descriptionTemplate">
 
-  <template id="hourly-template"></template>
-  <template id="favorite-template"></template>
+    </template>
 
+    <template id="fiveDayTemplate">
+      <div class="day">
+        <p class="day-name"></p>
+        <img src="#" class="day-weather">
+        <p class="temperature">
+          00<span class="unit-system">&deg;F</span>
+        </p>
+      </div>
+    </template>
+
+    <template id="hourlyTemplate"></template>
+
+    <template id="favoriteTemplate"></template>
+  </section>
 </body>
 
 </html>

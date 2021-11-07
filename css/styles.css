@@ -192,10 +192,10 @@ main > * {
   text-align: left;
 }
 
-.date .weekday {
+.date .dayName {
   font-size: 1.75rem;
   font-weight: bolder;
-  color: rgb(134, 51, 18);
+  color: hsl(17, 76%, 60%);
 }
 
 .forecast-overview .weather {

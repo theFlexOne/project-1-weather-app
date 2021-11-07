@@ -1,4 +1,5 @@
 const fiveDayTemplate = document.querySelector('#fiveDayTemplate');
+console.log(fiveDayTemplate);
 const fiveDayClone = fiveDayTemplate.content.cloneNode(true);
 
 const parseDayName = date => new Date(date * 1000).toString().split(' ')[0];
