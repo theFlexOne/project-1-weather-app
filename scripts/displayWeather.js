@@ -34,8 +34,12 @@ export const displayWeather = (data, location) => {
   const weatherDisplay = new WeatherDisplayData(data, location);
   console.log(weatherDisplay);
 
-  const overview = document.querySelector('.forecast-overview');
+  const cards = document.querySelectorAll('main > section');
+  console.log(cards);
+  const [overview, description, fiveDay, hourly] = [...cards];
+
   overview.replaceChildren(buildForecastOverview(weatherDisplay));
+  description.replaceChildren(buildForecastDescription(weatherDisplay));
   // description.innerHTML = forecastDescription;
   // fiveDay.innerHTML = '';
   // fiveDay.append(fiveDayForecast);
