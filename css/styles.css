@@ -29,7 +29,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  min-height: 100vh;
+  height: 100%;
 }
 
 header,
@@ -39,16 +39,18 @@ footer {
   /* border: var(--frosted-border); */
   /* box-shadow: var(--frosted-box-shadow); */
   height: 10vh;
-  min-width: 100vw;
+  width: 100vw;
 }
 
 header {
   display: flex;
   align-items: center;
+  align-self: flex-start;
   gap: 1em;
   padding-right: 1em;
   padding-left: 1em;
   min-height: 3.5rem;
+  margin-bottom: auto;
 }
 
 header .logo {
@@ -127,15 +129,18 @@ nav a:hover {
 }
 
 main {
-  /* margin: 2rem 0; */
+  margin: auto 0;
+
   color: rgba(255, 255, 255, 0.7);
   display: grid;
   min-height: 75vh;
+  height: 100%;
   width: min(100%, 910px);
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto auto;
   gap: 5% 2.5%;
-  padding: 2vw;
+  padding-top: 3rem;
+  padding-bottom: 5rem;
 }
 
 main > * {
@@ -192,7 +197,7 @@ main > * {
   text-align: left;
 }
 
-.date .dayName {
+.date .day-name {
   font-size: 1.75rem;
   font-weight: bolder;
   color: hsl(17, 76%, 60%);
@@ -219,14 +224,19 @@ main > * {
   object-fit: none;
 }
 
-.forecast-overview .temp {
+.temp-wrapper {
+  display: flex;
+}
+
+.temp {
   align-self: flex-end;
   font-size: 4rem;
   display: flex;
   align-items: flex-start;
+  margin-left: auto;
 }
 
-.temp .units {
+.unit {
   font-size: 1.5rem;
   padding-top: 0.65rem;
 }
@@ -310,7 +320,15 @@ main > * {
 }
 
 .hours-wrapper > * {
-  border-bottom: 2px solid hsl(227, 22%, 20%);
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-bottom: 0.1rem;
+  font-weight: bold;
+  border-bottom: 1px solid rgb(84, 90, 116);
 }
 
 .btm-buttons {
@@ -340,7 +358,9 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  align-self: flex-end;
   color: rgba(255, 255, 255, 0.7);
   font-family: var(--font-family-first);
   font-weight: 200;
+  margin-top: auto;
 }
