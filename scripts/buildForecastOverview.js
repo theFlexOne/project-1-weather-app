@@ -1,15 +1,14 @@
-const templateCard = document
+const docFrag = document
   .querySelector('#overviewTemplate')
   .content.cloneNode(true);
 
-const location = templateCard.querySelector('.location');
-const dayName = templateCard.querySelector('.day-name');
+const location = docFrag.querySelector('.location');
+const dayName = docFrag.querySelector('.day-name');
 const date = dayName.nextElementSibling;
-const img = templateCard.querySelector('img');
-const temp = templateCard.querySelector('.temp');
+const img = docFrag.querySelector('img');
+const temp = docFrag.querySelector('.temp');
 const units = temp.nextElementSibling;
 
-console.log({ location }, { dayName }, { date }, { img }, { temp });
 export const buildForecastOverview = (data, num = 0) => {
   location.textContent = data.location[0] + data.location[1];
   dayName.textContent = data.date.weather.dayName;
@@ -19,5 +18,5 @@ export const buildForecastOverview = (data, num = 0) => {
   temp.textContent = `${Math.round(data.weather.current.temp)}`;
   units.textContent = `°F`;
 
-  return templateCard;
+  return docFrag;
 };

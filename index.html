@@ -54,10 +54,10 @@
     <section class="card five-day-forecast"></section>
     <section class="card hourly-forecast">
       <div class="top-buttons" id="topButtons">
-        <button id="prevHour"><span class="material-icons-outlined">
+        <button type="button" id="prevHour"><span class="material-icons-outlined">
             keyboard_arrow_up
           </span></button>
-        <button id="prevPage"><i class="material-icons-outlined">
+        <button type="button" id="prevPage"><i class="material-icons-outlined">
             keyboard_double_arrow_up
           </i></button>
       </div>
@@ -103,17 +103,28 @@
     </template>
 
     <template id="descriptionTemplate">
-
-    </template>
-
-    <template id="fiveDayTemplate">
-      <div class="day">
-        <p class="day-name"></p>
-        <img src="#" class="day-weather">
-        <p class="temperature">
-          00<span class="unit-system">&deg;F</span>
-        </p>
-      </div>
+      <div class="high-temp">High: ${Math.round(
+        today.temp.max
+        )}<span class="unit">°F</span></div>
+      <div class="low-temp">Low: ${Math.round(
+        today.temp.min
+        )}<span class="unit">°F</span></div>
+      <div class="rainChance">Rain: ${today.pop}%</div>
+      <div class="wind">Wind: ${current.wind_speed} m/h</div>
+      <div class="humidity">Humidity: ${current.humidity}%</div>
+      <div class="visibility">Visibility: ${current.visibility / 100}%</div>
+      <div class="sunrise">Sunrise: ${sunrise.hour()}:${
+        (sunrise.hour() < 10 ? '0' : '' ) + sunrise.hour() } AM </div> <div class="sunset">Sunset: ${
+          sunset.getHours() > 12 ? sunset.getHours() - 12 : sunset.getHours()
+          }:${(sunset.getMinutes() < 10 ? '0' : '' ) + sunset.getMinutes()} PM </div> </template> <template
+            id="fiveDayTemplate">
+            <div class="day">
+              <p class="day-name"></p>
+              <img src="#" class="day-weather">
+              <p class="temperature">
+                00<span class="unit-system">&deg;F</span>
+              </p>
+            </div>
     </template>
 
     <template id="hourlyTemplate"></template>

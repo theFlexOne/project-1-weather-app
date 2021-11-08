@@ -6,8 +6,6 @@ import { formatDay } from './formatDay.js';
 import { buildForecastOverview } from './buildForecastOverview.js';
 import { buildForecastDescription } from './buildForecastDescription.js';
 
-const cardTemplates = document.querySelectorAll('template');
-
 class WeatherDisplayData {
   constructor(data, location) {
     let locationName = location.split(', ');
@@ -23,32 +21,21 @@ class WeatherDisplayData {
 }
 
 export const displayWeather = (data, location) => {
-  console.log(location);
-  // buildForecastOverview(data);
-  const weatherCards = document.querySelector('main');
-
-  const docFrag = document.createDocumentFragment();
-  const cardClones = document.querySelector('main').cloneNode('false').children;
-  const btmButtons = document.querySelector('#btmButtons');
-
-  const weatherDisplay = new WeatherDisplayData(data, location);
-  console.log(weatherDisplay);
-
+  const weatherDisplayData = new WeatherDisplayData(data, location);
   const cards = document.querySelectorAll('main > section');
-  console.log(cards);
-  const [overview, description, fiveDay, hourly] = [...cards];
+  const [
+    overview,
+    description,
+    fiveDay,
+    {
+      children: [, hourly],
+    },
+  ] = [...cards];
 
-  overview.replaceChildren(buildForecastOverview(weatherDisplay));
-  description.replaceChildren(buildForecastDescription(weatherDisplay));
-  // description.innerHTML = forecastDescription;
-  // fiveDay.innerHTML = '';
-  // fiveDay.append(fiveDayForecast);
-  // hours.innerHTML = '';
-  // hours.append(hourlyForecast);
+  overview.replaceChildren(buildForecastOverview(weatherDisplayData));
+  description.replaceChildren(buildForecastDescription(weatherDisplayData));
+  fiveDay.replaceChildren(buildFiveDayForecast(weatherDisplayData));
+  hourly.replaceChildren(buildHourlyForecast(weatherDisplayData));
 
-  // docFrag.append(...cardClones);
-  // // return docFrag;
-  // weatherCards.innerHTML = '';
-  // weatherCards.appendChild(docFrag);
-  renderBackgroundImg(sunrise, sunset);
+  renderBackgroundImg(weatherDisplayData);
 };

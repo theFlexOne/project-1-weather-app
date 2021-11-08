@@ -1,15 +1,9 @@
-const fiveDayTemplate = document.querySelector('#fiveDayTemplate');
-console.log(fiveDayTemplate);
-const fiveDayClone = fiveDayTemplate.content.cloneNode(true);
-
 const parseDayName = date => new Date(date * 1000).toString().split(' ')[0];
 const createSpan = () => document.createElement('SPAN');
 
-export const buildFiveDayForecast = weatherData => {
-  const fiveDays = weatherData.daily.slice(1, 6);
+export const buildFiveDayForecast = ({ weather }) => {
+  const fiveDays = weather.daily.slice(1, 6);
   const docFrag = document.createDocumentFragment();
-
-  // const divs = [];
   fiveDays.forEach(day => {
     const {
       pop: rain,
@@ -28,26 +22,13 @@ export const buildFiveDayForecast = weatherData => {
     span1.className = 'day-name';
     span1.textContent = parseDayName(date);
     img.src = `http://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
-    span2.textContent = `${Math.round(min)}`;
+    span2.textContent = Math.round(min);
     span3.className = 'unitSys';
     span3.innerText = '°F';
 
     span2.appendChild(span3);
     div.append(span1, img, span2);
-    // console.dir(div.childNodes);
     return docFrag.append(div);
   });
   return docFrag;
 };
-// const div = `
-//   <div class="day wrapper">
-//     <span class="day-name">${dayName}</span>
-//     <img src="${iconURL}">
-//     <span>
-//       ${Math.round(min)}<span class="unitSys">°F</span> - ${Math.round(
-//   max
-// )}<span class="unit">°F</span>
-//     </span>
-//   </div>`;
-// divs.push(div);
-// return divs.join('');

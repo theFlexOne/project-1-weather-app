@@ -7,6 +7,5 @@ export const compileInputForecast = async e => {
   const { lat, lon, address } = await fetchInputLocationData();
   const weatherData = await fetchWeather(lat, lon);
 
-  console.log(weatherData, address);
   return displayWeather(weatherData, address);
 };

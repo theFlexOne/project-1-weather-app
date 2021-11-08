@@ -8,8 +8,6 @@ export const fetchInputLocationData = async () => {
   const url = PLACES_API_ENDPOINT + query;
   const places = await (await fetch(url)).json();
   const place = places.candidates[0];
-  console.log(places);
-  console.log(place);
   const { lat, lng: lon } = place.geometry.location;
   const address = place.formatted_address;
   const place_id = place.place_id;

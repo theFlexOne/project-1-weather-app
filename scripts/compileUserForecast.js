@@ -4,15 +4,12 @@ import { fetchUserLocationName } from './fetchUserLocationName.js';
 import { fetchWeather } from './fetchWeather.js';
 
 export const compileUserForecast = async () => {
-  // debugger;
-  const { latitude: lat, longitude: lon } = (await fetchUserLocationData())
-    .coords;
-  debugger;
-  // code is blocking, for now... Can be done asynchronously
+  let address, weatherData;
   try {
-    const address = await fetchUserLocationName(lat, lon);
-    const weatherData = await fetchWeather(lat, lon);
-    // console.log(weatherData, address);
+    const { latitude: lat, longitude: lon } = (await fetchUserLocationData())
+      .coords;
+    address = await fetchUserLocationName(lat, lon);
+    weatherData = await fetchWeather(lat, lon);
   } catch (err) {
     throw new Error(err);
   }
