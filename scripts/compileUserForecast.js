@@ -7,10 +7,14 @@ export const compileUserForecast = async () => {
   // debugger;
   const { latitude: lat, longitude: lon } = (await fetchUserLocationData())
     .coords;
-
+  debugger;
   // code is blocking, for now... Can be done asynchronously
-  const placeName = await fetchUserLocationName(lat, lon);
-  const weatherData = await fetchWeather(lat, lon);
-  console.log(weatherData, placeName);
-  return displayWeather(weatherData, placeName);
+  try {
+    const address = await fetchUserLocationName(lat, lon);
+    const weatherData = await fetchWeather(lat, lon);
+    // console.log(weatherData, address);
+  } catch (err) {
+    throw new Error(err);
+  }
+  return displayWeather(weatherData, address);
 };
