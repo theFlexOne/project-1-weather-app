@@ -1,7 +1,6 @@
 // import { autocomplete } from './node_modules/@algolia/autocomplete-js'; // <-- A future component
 import { compileInputForecast } from './scripts/compileInputForecast.js';
 import { compileUserForecast } from './scripts/compileUserForecast.js';
-import { DateTime } from './luxon.min.js';
 
 const userLocationButton = document.querySelector('#userLocationButton');
 const searchForm = document.querySelector('form');
