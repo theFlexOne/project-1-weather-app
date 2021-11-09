@@ -9,17 +9,17 @@ export const buildHourlyForecast = ({ weather }) => {
   console.dir(weather);
   const hourlyData = weather.hourly.slice(0, 6);
   const docFrag = document.createDocumentFragment();
-  hourlyData.forEach(({ temp, dt }, i) => {
+  hourlyData.forEach(({ temp, dt }) => {
     const hours = parseHourStr(new Date(dt * 1000).getHours());
     const div = document.createElement('DIV');
     const spanHr = document.createElement('SPAN');
     const spanTemp = document.createElement('SPAN');
 
     spanHr.className = 'hour';
-    spanHr.textContent = `${Math.round(temp)}°F`;
-    spanHr.className = 'temp';
-    spanHr.textContent = `${Math.round(temp)}°F`;
-    div.append(`${hours} --- ${Math.round(temp)}`, span);
+    spanHr.textContent = `${Math.round(hours)}`;
+    spanTemp.className = 'temp';
+    spanTemp.textContent = `${Math.round(temp)}°F`;
+    div.append(spanHr, '---', spanTemp);
     docFrag.appendChild(div);
   });
   return docFrag;
