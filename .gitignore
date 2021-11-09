@@ -9,3 +9,4 @@ netlify.toml
 netlify/functions
 templates.html
 .vscode
+random.html
