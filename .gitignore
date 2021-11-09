@@ -9,4 +9,4 @@ netlify.toml
 netlify/functions
 templates.html
 .vscode
-<section class="card forecast-overview">.html
+random.html
