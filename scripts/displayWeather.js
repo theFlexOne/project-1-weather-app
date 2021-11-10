@@ -2,7 +2,6 @@ import { buildDate } from './buildDate.js';
 import { buildFiveDayForecast } from './buildFiveDayForecast.js';
 import { buildHourlyForecast } from './buildHourlyForecast.js';
 import { renderBackgroundImg } from './renderBackgroundImg.js';
-import { formatDay } from './formatDay.js';
 import { buildForecastOverview } from './buildForecastOverview.js';
 import { buildForecastDescription } from './buildForecastDescription.js';
 

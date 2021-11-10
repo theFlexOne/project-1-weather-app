@@ -10,8 +10,9 @@ export const compileUserForecast = async () => {
       .coords;
     address = await fetchUserLocationName(lat, lon);
     weatherData = await fetchWeather(lat, lon);
+    return displayWeather(weatherData, address);
   } catch (err) {
     throw new Error(err);
   }
-  return displayWeather(weatherData, address);
+  // return displayWeather(weatherData, address);
 };

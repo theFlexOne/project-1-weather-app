@@ -17,7 +17,7 @@ export const buildHourlyForecast = ({ weather }) => {
 
     spanHr.className = 'hour';
     spanHr.textContent = `${Math.round(hours)}`;
-    spanTemp.className = 'temp';
+    spanTemp.className = 'hour-temp';
     spanTemp.textContent = `${Math.round(temp)}°F`;
     div.append(spanHr, '---', spanTemp);
     docFrag.appendChild(div);

@@ -6,7 +6,7 @@ const location = docFrag.querySelector('.location');
 const dayName = docFrag.querySelector('.day-name');
 const date = dayName.nextElementSibling;
 const img = docFrag.querySelector('img');
-const temp = docFrag.querySelector('.temp');
+const temp = docFrag.querySelector('.current-temp');
 const units = temp.nextElementSibling;
 
 export const buildForecastOverview = (data, num = 0) => {

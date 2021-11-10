@@ -166,7 +166,7 @@ main > * {
   flex-grow: 1;
 }
 
-.location-and-date {
+.forecast-overview .location-and-date {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -176,11 +176,11 @@ main > * {
   margin: 0.5rem;
 }
 
-.location {
+.forecast-overview .location {
   max-width: 70%;
 }
 
-.location {
+.forecast-overview .location {
   font-size: 2.25rem;
   font-weight: 200;
 }
@@ -190,12 +190,12 @@ main > * {
   font-weight: 200;
 } */
 
-.date {
+.forecast-overview .date {
   font-size: 1.15rem;
   text-align: left;
 }
 
-.date .day-name {
+.forecast-overview .day-name {
   font-size: 1.75rem;
   font-weight: bolder;
   color: hsl(17, 76%, 60%);
@@ -213,20 +213,18 @@ main > * {
 .forecast-overview .image-wrapper {
   max-height: 150px;
   max-width: 150px;
-  display: flex;
-  align-self: flex-start;
 }
 
-.image-wrapper img {
+.forecast-overview img {
   height: 100%;
   object-fit: none;
 }
 
-.temp-wrapper {
+.forecast-overview .current-temp-wrapper {
   display: flex;
 }
 
-.temp {
+.forecast-overview .current-temp {
   align-self: flex-end;
   font-size: 4rem;
   display: flex;
@@ -234,7 +232,7 @@ main > * {
   margin-left: auto;
 }
 
-.unit {
+.forecast-overview .unit {
   font-size: 1.5rem;
   padding-top: 0.65rem;
 }
@@ -304,6 +302,10 @@ main > * {
   justify-self: flex-start;
 }
 
+.btm-buttons {
+  justify-self: flex-end;
+}
+
 .hours-wrapper {
   display: flex;
   flex-direction: inherit;
@@ -327,10 +329,6 @@ main > * {
   padding-bottom: 0.1rem;
   font-weight: bold;
   border-bottom: 1px solid rgb(84, 90, 116);
-}
-
-.btm-buttons {
-  justify-self: flex-end;
 }
 
 /*
