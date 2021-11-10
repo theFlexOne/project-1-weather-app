@@ -306,20 +306,20 @@ main > * {
   justify-self: flex-end;
 }
 
-.hours-wrapper {
+.hourly-forecast ol {
   display: flex;
-  flex-direction: inherit;
+  flex-direction: column;
   flex-grow: 1;
   justify-content: space-between;
   text-align: center;
   
 }
 
-.hours-wrapper > :first-child {
+.hourly-forecast .hours-wrapper > :first-child {
   border-top: 2px solid hsl(227, 22%, 20%);
 }
 
-.hours-wrapper > * {
+.hours-wrapper ol > * {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-around;
