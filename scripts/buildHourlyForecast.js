@@ -1,22 +1,15 @@
-const parseHourStr = hours => {
-  let hourStr = '';
-  if (hours > 12) hourStr += hours - 12 + ' PM';
-  else hourStr += hours + (hours === 12 ? ' PM' : ' AM');
-  return hourStr;
-};
-
 export const buildHourlyForecast = ({ weather }) => {
   console.dir(weather);
   const hourlyData = weather.hourly.slice(0, 6);
   const docFrag = document.createDocumentFragment();
   hourlyData.forEach(({ temp, dt }) => {
-    const hours = parseHourStr(new Date(dt * 1000).getHours());
+    const hours = moment().format('ha');
     const div = document.createElement('DIV');
     const spanHr = document.createElement('SPAN');
     const spanTemp = document.createElement('SPAN');
 
     spanHr.className = 'hour';
-    spanHr.textContent = `${Math.round(hours)}`;
+    spanHr.textContent = moment().format('ha');
     spanTemp.className = 'temp';
     spanTemp.textContent = `${Math.round(temp)}°F`;
     div.append(spanHr, '---', spanTemp);
