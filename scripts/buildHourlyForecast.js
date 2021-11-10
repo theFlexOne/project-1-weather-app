@@ -1,37 +1,24 @@
-const parseHourStr = hours => {
-  let hourStr = '';
-  if (hours > 12) hourStr += hours - 12 + ' PM';
-  else hourStr += hours + (hours === 12 ? ' PM' : ' AM');
-  return hourStr;
-};
-
 export const buildHourlyForecast = ({ weather }) => {
+  // debugger;
+  const docFragOl = document.createDocumentFragment();
   console.dir(weather);
   const hourlyData = weather.hourly.slice(0, 6);
-  const docFrag = document.createDocumentFragment();
-  hourlyData.forEach(({ temp, dt }) => {
-    const hours = parseHourStr(new Date(dt * 1000).getHours());
-    const div = document.createElement('DIV');
-    const spanHr = document.createElement('SPAN');
-    const spanTemp = document.createElement('SPAN');
+  // const docFrag = document.createDocumentFragment();
+  const template = document.querySelector('#hourlyTemplate');
+  console.log(template);
+  hourlyData.forEach(hour => {
+    const frag = template.content.cloneNode(true);
+    const spanHour = frag.querySelector('.hour');
+    const spanImg = frag.querySelector('img');
+    const spanTemp = frag.querySelector('.temp');
 
-    spanHr.className = 'hour';
-    spanHr.textContent = `${Math.round(hours)}`;
-    spanTemp.className = 'hour-temp';
-    spanTemp.textContent = `${Math.round(temp)}°F`;
-    div.append(spanHr, '---', spanTemp);
-    docFrag.appendChild(div);
+    const hourText = moment(hour.dt * 1000).format('ha');
+    const img = hour.weather[0].icon;
+    spanHour.textContent = hourText;
+    spanImg.src = `http://openweathermap.org/img/wn/${img}.png`;
+    spanTemp.textContent = `${Math.round(hour.temp)}°F`;
+    // div.append(spanHr, '---', spanTemp);
+    docFragOl.appendChild(frag);
   });
-  return docFrag;
+  return docFragOl;
 };
-
-/*
-<div class="hours-wrapper" id="hoursWrapper">
-  <div>2 PM --- 51<span class="unitSys">°F</span></div>
-  <div>3 PM --- 51<span class="unitSys">°F</span></div>
-  <div>4 PM --- 50<span class="unitSys">°F</span></div>
-  <div>5 PM --- 49<span class="unitSys">°F</span></div>
-  <div>6 PM --- 47<span class="unitSys">°F</span></div>
-  <div>7 PM --- 45<span class="unitSys">°F</span></div>
-</div>
-*/

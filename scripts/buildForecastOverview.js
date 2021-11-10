@@ -2,6 +2,8 @@ const docFrag = document
   .querySelector('#overviewTemplate')
   .content.cloneNode(true);
 
+console.log({ docFrag });
+
 const location = docFrag.querySelector('.location');
 const dayName = docFrag.querySelector('.day-name');
 const date = dayName.nextElementSibling;

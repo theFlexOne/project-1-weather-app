@@ -21,15 +21,13 @@ class WeatherDisplayData {
 
 export const displayWeather = (data, location) => {
   const weatherDisplayData = new WeatherDisplayData(data, location);
-  const cards = document.querySelectorAll('main > section');
-  const [
-    overview,
-    description,
-    fiveDay,
-    {
-      children: [, hourly],
-    },
-  ] = [...cards];
+
+  const overview = document.querySelector('.forecast-overview');
+  const description = document.querySelector('.forecast-description');
+  const fiveDay = document.querySelector('.five-day-forecast');
+  const hourly = document.querySelector('.hourly-forecast ol');
+
+  console.log(overview, description, fiveDay, hourly);
 
   overview.replaceChildren(buildForecastOverview(weatherDisplayData));
   description.replaceChildren(buildForecastDescription(weatherDisplayData));
