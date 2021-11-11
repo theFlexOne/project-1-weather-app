@@ -1,17 +1,15 @@
-const docFrag = document
-  .querySelector('#overviewTemplate')
-  .content.cloneNode(true);
+export const buildForecastOverview = data => {
+  const docFrag = document
+    .querySelector('#overviewTemplate')
+    .content.cloneNode(true);
 
-console.log({ docFrag });
+  const location = docFrag.querySelector('.location');
+  const dayName = docFrag.querySelector('.day-name');
+  const date = dayName.nextElementSibling;
+  const img = docFrag.querySelector('img');
+  const temp = docFrag.querySelector('.current-temp');
+  const units = temp.nextElementSibling;
 
-const location = docFrag.querySelector('.location');
-const dayName = docFrag.querySelector('.day-name');
-const date = dayName.nextElementSibling;
-const img = docFrag.querySelector('img');
-const temp = docFrag.querySelector('.current-temp');
-const units = temp.nextElementSibling;
-
-export const buildForecastOverview = (data, num = 0) => {
   location.textContent = data.location[0] + data.location[1];
   dayName.textContent = data.date.weather.dayName;
   date.textContent = data.date.weather.date;
