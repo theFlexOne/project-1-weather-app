@@ -13,7 +13,7 @@ export const buildForecastOverview = data => {
   const icon = data.weather.current.weather[0].icon;
 
   location.textContent = data.location;
-  date.textContent = data.date.format('ddd, MMMM Do YYYY');
+  date.textContent = data.date.format('ddd, MMMM Do');
   img.src = `http://openweathermap.org/img/wn/${icon}@4x.png`;
   temp.textContent = `${Math.round(data.weather.current.temp)}`;
   units.textContent = `°F`;
