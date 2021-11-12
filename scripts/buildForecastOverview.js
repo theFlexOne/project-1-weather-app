@@ -1,14 +1,11 @@
 export const buildForecastOverview = data => {
-  console.log(data);
   const docFrag = document
     .querySelector('#overviewTemplate')
     .content.cloneNode(true);
 
   const location = docFrag.querySelector('.location');
   const dayName = docFrag.querySelector('.day-name');
-  console.log({ dayName });
   const date = dayName.nextElementSibling;
-  console.log({ date });
   const img = docFrag.querySelector('img');
   const temp = docFrag.querySelector('.current-temp');
   const units = temp.nextElementSibling;
