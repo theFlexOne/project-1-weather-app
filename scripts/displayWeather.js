@@ -15,6 +15,8 @@ class WeatherDisplayData {
 export const displayWeather = (data, location) => {
   const weatherDisplayData = new WeatherDisplayData(data, location);
 
+  console.dir(weatherDisplayData);
+
   const overview = document.querySelector('.forecast-overview');
   const description = document.querySelector('.forecast-description');
   const fiveDay = document.querySelector('.five-day-forecast');
