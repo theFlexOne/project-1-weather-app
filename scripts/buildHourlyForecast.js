@@ -1,11 +1,9 @@
 export const buildHourlyForecast = ({ weather }) => {
   // debugger;
   const docFragOl = document.createDocumentFragment();
-  console.dir(weather);
   const hourlyData = weather.hourly.slice(0, 6);
   // const docFrag = document.createDocumentFragment();
   const template = document.querySelector('#hourlyTemplate');
-  console.log(template);
   hourlyData.forEach(hour => {
     const frag = template.content.cloneNode(true);
     const spanHour = frag.querySelector('.hour');

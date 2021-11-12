@@ -5,9 +5,6 @@ export const buildForecastDescription = ({ weather, date }) => {
   const sunrise = moment(today.sunrise * 1000).format('h:mm a');
   const sunset = moment(today.sunset * 1000).format('h:mm a');
 
-  console.log('sunrise', sunrise);
-  console.log('sunset', sunset);
-
   const docFrag = document
     .querySelector('#descriptionTemplate')
     .cloneNode(true).content;

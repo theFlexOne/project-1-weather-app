@@ -2,7 +2,6 @@ export const fetchUserLocationData = (options = {}) => {
   if (navigator.geolocation) {
     return new Promise((resolve, reject) => {
       const success = position => {
-        console.log(position);
         resolve(position);
       };
       const error = err => {
