@@ -5,14 +5,10 @@ import { fetchWeather } from './fetchWeather.js';
 
 export const compileUserForecast = async () => {
   let address, weatherData;
-  try {
-    const { latitude: lat, longitude: lon } = (await fetchUserLocationData())
-      .coords;
-    address = await fetchUserLocationName(lat, lon);
-    weatherData = await fetchWeather(lat, lon);
-    return displayWeather(weatherData, address);
-  } catch (err) {
-    throw new Error(err);
-  }
+  const { latitude: lat, longitude: lon } = (await fetchUserLocationData())
+    .coords;
+  address = await fetchUserLocationName(lat, lon);
+  weatherData = await fetchWeather(lat, lon);
+  return displayWeather(weatherData, address);
   // return displayWeather(weatherData, address);
 };
