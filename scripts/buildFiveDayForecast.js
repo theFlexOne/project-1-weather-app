@@ -1,4 +1,3 @@
-const parseDayName = date => new Date(date * 1000).toString().split(' ')[0];
 const createSpan = () => document.createElement('SPAN');
 
 export const buildFiveDayForecast = ({ weather }) => {
@@ -13,7 +12,6 @@ export const buildFiveDayForecast = ({ weather }) => {
       temp: { max },
     } = day;
 
-    //TODO - refactor into docFrag from HTML template
     const div = document.createElement('DIV');
     const span1 = createSpan();
     const img = document.createElement('IMG');
