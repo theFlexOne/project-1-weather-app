@@ -17,5 +17,3 @@ Although this app is designed for user experience, it's real purpose is to be a 
 There's nothing to install. Feel free to fork it and build your own app on top. You will, however, need to supply your own API keys for [OpenWeather's API's](http://www.openweathermap.org/api) and the [Google Cloud Platform](https://console.cloud.google.com/)
 
 Also, calling the Google Places API will create a "cors" issue. Until this repo is updated, the "cors" issue is up to you to deal with. Two different Chrome extensions that will bypass the cors error, at least while in development, are [Moesif Origin & CORS Changer](https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc) & [Allow CORS: Access-Control-Allow-Origin](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf). I'm sure there are others, but those 2 worked for me.
-
-_For my instructors, I can give you my working API keys, just message me in Slack._
